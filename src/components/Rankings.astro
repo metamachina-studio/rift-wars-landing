@@ -1,0 +1,29 @@
+---
+import Leaderboard from './Leaderboard.tsx';
+import FeaturedPlayers from './FeaturedPlayers.tsx';
+---
+
+<section id="rankings" class="section-padding bg-mm-bg relative">
+  <div class="section-container">
+    <!-- Section Header -->
+    <div class="text-center mb-16 reveal">
+      <p class="font-rajdhani text-mm-cyan uppercase tracking-[0.3em] text-sm mb-3">Compete</p>
+      <h2 class="text-3xl sm:text-4xl md:text-5xl font-orbitron neon-text mb-4">Rankings</h2>
+      <div class="section-divider mt-6"></div>
+    </div>
+
+    <!-- Featured Players -->
+    <div class="reveal mb-16">
+      <h3 class="font-orbitron text-lg text-mm-text text-center mb-8 tracking-wide">Top Rifters</h3>
+      <FeaturedPlayers client:visible />
+    </div>
+
+    <!-- Leaderboard -->
+    <div class="reveal">
+      <h3 class="font-orbitron text-lg text-mm-text text-center mb-8 tracking-wide">Leaderboard</h3>
+      <div class="max-w-4xl mx-auto bg-mm-card/30 border border-mm-elevated/30 p-6">
+        <Leaderboard client:visible />
+      </div>
+    </div>
+  </div>
+</section>

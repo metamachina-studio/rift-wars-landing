@@ -1,0 +1,96 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Privacy Policy — Rift Wars" description="Privacy Policy for Rift Wars by Meta Machina Studio LLC.">
+  <section class="section-padding pt-32 bg-mm-bg">
+    <div class="section-container max-w-3xl">
+      <h1 class="font-orbitron text-3xl font-bold text-mm-text mb-8 neon-text">Privacy Policy</h1>
+
+      <div class="prose prose-invert max-w-none space-y-6">
+        <p class="font-exo text-mm-text2">Last updated: April 2, 2026</p>
+        <p class="font-exo text-mm-text2 leading-relaxed">
+          This Privacy Policy describes how <strong>Meta Machina Studio LLC</strong> ("Company," "we," "us") collects, uses,
+          and protects your information when you use Rift Wars and related services.
+        </p>
+
+        <h2 class="font-orbitron text-lg text-mm-cyan mt-8 mb-3">1. Information We Collect</h2>
+        <p class="font-exo text-mm-text2 leading-relaxed"><strong>Account Data:</strong> When you create an account via Google OAuth, we receive your display name and email address. When you connect a Solana wallet, we store your public wallet address. We never have access to your private keys or wallet seed phrases.</p>
+        <p class="font-exo text-mm-text2 leading-relaxed"><strong>Gameplay Data:</strong> Match history, ELO rating, level, XP, card collection, deck configurations, clan membership, friends list, skill allocations, M-Credz balance, and tutorial progress.</p>
+        <p class="font-exo text-mm-text2 leading-relaxed"><strong>Technical Data:</strong> IP address (for rate limiting and anti-abuse), browser/device type (from HTTP headers), and WebSocket connection metadata. We do not use Google Analytics or third-party tracking scripts.</p>
+        <p class="font-exo text-mm-text2 leading-relaxed"><strong>Communications:</strong> In-game direct messages and clan chat messages are stored on our servers to provide the messaging service.</p>
+
+        <h2 class="font-orbitron text-lg text-mm-cyan mt-8 mb-3">2. How We Use Your Data</h2>
+        <ul class="font-exo text-mm-text2 leading-relaxed list-disc ml-6 space-y-1">
+          <li>Providing the game experience: matchmaking, leaderboards, social features, account management</li>
+          <li>Anti-cheat and abuse prevention (IP-based rate limiting, multi-account detection)</li>
+          <li>Game balance analysis using aggregated, anonymized gameplay statistics</li>
+          <li>Processing transactions (M-Credz, packs, battle passes) when applicable</li>
+          <li>Communicating service updates, security notices, or policy changes</li>
+        </ul>
+        <p class="font-exo text-mm-text2 leading-relaxed"><strong>We do not sell, rent, or share your personal information with third parties for marketing purposes.</strong></p>
+
+        <h2 class="font-orbitron text-lg text-mm-cyan mt-8 mb-3">3. Third-Party Services</h2>
+        <ul class="font-exo text-mm-text2 leading-relaxed list-disc ml-6 space-y-1">
+          <li><strong>Google OAuth:</strong> Used for account authentication. Subject to <a href="https://policies.google.com/privacy" target="_blank" rel="noopener" class="text-mm-cyan hover:underline">Google's Privacy Policy</a>.</li>
+          <li><strong>Amazon Web Services (AWS):</strong> Our servers, database (Aurora PostgreSQL), and cache (ElastiCache Redis) are hosted in the us-west-2 (Oregon) region.</li>
+          <li><strong>Solana Blockchain:</strong> Wallet authentication and future NFT/token transactions occur on a public blockchain. On-chain transactions are publicly visible by nature.</li>
+        </ul>
+
+        <h2 class="font-orbitron text-lg text-mm-cyan mt-8 mb-3">4. Data Storage & Security</h2>
+        <p class="font-exo text-mm-text2 leading-relaxed">
+          Data is stored on AWS infrastructure in the United States (us-west-2). All data transmission uses HTTPS/TLS 1.2+.
+          Database credentials are stored in AWS Secrets Manager. We follow industry-standard security practices including
+          CORS restrictions, rate limiting, input validation, and parameterized database queries.
+        </p>
+
+        <h2 class="font-orbitron text-lg text-mm-cyan mt-8 mb-3">5. Data Retention</h2>
+        <p class="font-exo text-mm-text2 leading-relaxed">
+          Account data is retained for as long as your account is active. Guest accounts and their data are periodically purged.
+          If you request account deletion, we will delete your personal data within 30 days. Anonymized, aggregated gameplay
+          statistics may be retained indefinitely for game balance purposes. On-chain data (NFT ownership, blockchain transactions)
+          cannot be deleted as it is part of the public blockchain record.
+        </p>
+
+        <h2 class="font-orbitron text-lg text-mm-cyan mt-8 mb-3">6. Your Rights</h2>
+        <p class="font-exo text-mm-text2 leading-relaxed">Depending on your location, you may have the right to:</p>
+        <ul class="font-exo text-mm-text2 leading-relaxed list-disc ml-6 space-y-1">
+          <li><strong>Access:</strong> Request a copy of the personal data we hold about you</li>
+          <li><strong>Correction:</strong> Request correction of inaccurate data</li>
+          <li><strong>Deletion:</strong> Request deletion of your account and personal data</li>
+          <li><strong>Portability:</strong> Request your data in a machine-readable format</li>
+          <li><strong>Objection:</strong> Object to certain processing activities</li>
+        </ul>
+        <p class="font-exo text-mm-text2 leading-relaxed">
+          <strong>California Residents (CCPA):</strong> You have the right to know what personal information we collect, request its deletion,
+          and opt out of its sale. We do not sell personal information.
+        </p>
+        <p class="font-exo text-mm-text2 leading-relaxed">
+          <strong>EEA Residents (GDPR):</strong> You have additional rights under the General Data Protection Regulation, including the
+          right to lodge a complaint with your local data protection authority.
+        </p>
+        <p class="font-exo text-mm-text2 leading-relaxed">
+          To exercise any of these rights, contact us at <a href="mailto:legal@metamachina.io" class="text-mm-cyan hover:underline">legal@metamachina.io</a>.
+        </p>
+
+        <h2 class="font-orbitron text-lg text-mm-cyan mt-8 mb-3">7. Children</h2>
+        <p class="font-exo text-mm-text2 leading-relaxed">
+          The Service is not directed at children under 18. We do not knowingly collect personal information from anyone under 18.
+          If you believe a minor has provided us with personal information, contact us and we will delete it promptly.
+        </p>
+
+        <h2 class="font-orbitron text-lg text-mm-cyan mt-8 mb-3">8. Changes to This Policy</h2>
+        <p class="font-exo text-mm-text2 leading-relaxed">
+          We may update this Privacy Policy from time to time. Material changes will be communicated via the Service or our website.
+        </p>
+
+        <h2 class="font-orbitron text-lg text-mm-cyan mt-8 mb-3">9. Contact</h2>
+        <p class="font-exo text-mm-text2 leading-relaxed">
+          Meta Machina Studio LLC<br />
+          Email: <a href="mailto:legal@metamachina.io" class="text-mm-cyan hover:underline">legal@metamachina.io</a><br />
+          Discord: <a href="https://discord.gg/dNcvNkc33C" target="_blank" rel="noopener" class="text-mm-cyan hover:underline">discord.gg/dNcvNkc33C</a>
+        </p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

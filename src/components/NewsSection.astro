@@ -1,0 +1,27 @@
+---
+import NewsCard from './NewsCard.astro';
+import { articles } from '../lib/news';
+---
+
+<section id="news" class="section-padding bg-mm-bg relative">
+  <div class="section-container">
+    <!-- Section Header -->
+    <div class="text-center mb-16 reveal">
+      <p class="font-rajdhani text-mm-cyan uppercase tracking-[0.3em] text-sm mb-3">Latest</p>
+      <h2 class="text-3xl sm:text-4xl md:text-5xl font-orbitron neon-text mb-4">News & Updates</h2>
+      <div class="section-divider mt-6"></div>
+    </div>
+
+    <!-- News Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      {articles.map((article, i) => (
+        <NewsCard article={article} index={i} />
+      ))}
+    </div>
+
+    <!-- All News Link -->
+    <div class="text-center mt-10 reveal">
+      <a href="/news" class="btn-primary text-sm">View All News</a>
+    </div>
+  </div>
+</section>

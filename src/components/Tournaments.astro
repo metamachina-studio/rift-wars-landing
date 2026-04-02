@@ -1,0 +1,49 @@
+---
+const gameUrl = import.meta.env.PUBLIC_GAME_URL || 'https://rift.metamachina.io';
+---
+
+<section id="tournaments" class="section-padding bg-mm-bg2 relative">
+  <div class="section-container">
+    <!-- Section Header -->
+    <div class="text-center mb-16 reveal">
+      <p class="font-rajdhani text-mm-cyan uppercase tracking-[0.3em] text-sm mb-3">Compete</p>
+      <h2 class="text-3xl sm:text-4xl md:text-5xl font-orbitron neon-text mb-4">Tournaments</h2>
+      <div class="section-divider mt-6"></div>
+    </div>
+
+    <!-- Coming Soon -->
+    <div class="reveal max-w-2xl mx-auto text-center">
+      <div class="bg-mm-card/50 border border-mm-cyan/20 neon-box p-12">
+        <div class="text-5xl mb-6 text-mm-cyan glow-pulse">&#9876;</div>
+        <h3 class="font-orbitron text-2xl text-mm-cyan neon-text mb-4">Coming Soon</h3>
+        <p class="font-exo text-mm-text2 mb-8 leading-relaxed">
+          Organized tournament play is on the horizon. Weekly brackets, seasonal championships,
+          and exclusive rewards for top Rifters. Get ranked now to qualify.
+        </p>
+
+        <!-- Placeholder Schedule -->
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
+          <div class="bg-mm-bg/50 border border-mm-elevated/30 p-4">
+            <p class="font-rajdhani text-mm-cyan text-sm uppercase tracking-wider mb-1">Weekly</p>
+            <p class="font-orbitron text-lg text-mm-text">Rift Clash</p>
+            <p class="font-exo text-mm-muted text-xs mt-1">32-player brackets</p>
+          </div>
+          <div class="bg-mm-bg/50 border border-mm-elevated/30 p-4">
+            <p class="font-rajdhani text-mm-gold text-sm uppercase tracking-wider mb-1">Monthly</p>
+            <p class="font-orbitron text-lg text-mm-text">Pangaea Cup</p>
+            <p class="font-exo text-mm-muted text-xs mt-1">Top 64 ranked players</p>
+          </div>
+          <div class="bg-mm-bg/50 border border-mm-elevated/30 p-4">
+            <p class="font-rajdhani text-mm-red text-sm uppercase tracking-wider mb-1">Seasonal</p>
+            <p class="font-orbitron text-lg text-mm-text">World Rift</p>
+            <p class="font-exo text-mm-muted text-xs mt-1">Grand championship</p>
+          </div>
+        </div>
+
+        <a href={gameUrl} target="_blank" rel="noopener" class="btn-primary text-sm">
+          Start Climbing the Ranks
+        </a>
+      </div>
+    </div>
+  </div>
+</section>

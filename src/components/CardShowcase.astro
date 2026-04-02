@@ -1,0 +1,20 @@
+---
+import CardShowcaseIsland from './CardShowcaseIsland.tsx';
+---
+
+<section id="cards" class="section-padding bg-mm-bg2 relative">
+  <div class="section-container">
+    <!-- Section Header -->
+    <div class="text-center mb-16 reveal">
+      <p class="font-rajdhani text-mm-cyan uppercase tracking-[0.3em] text-sm mb-3">Starter Deck</p>
+      <h2 class="text-3xl sm:text-4xl md:text-5xl font-orbitron neon-text mb-4">Card Gallery</h2>
+      <p class="font-exo text-mm-text2 max-w-xl mx-auto">
+        Every player starts with 30 soulbound cards across 16 clans. Click any card for full details.
+      </p>
+      <div class="section-divider mt-6"></div>
+    </div>
+
+    <!-- Card Showcase (React Island) -->
+    <CardShowcaseIsland client:visible />
+  </div>
+</section>

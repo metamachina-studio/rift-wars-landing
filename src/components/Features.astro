@@ -1,0 +1,110 @@
+---
+const features = [
+  {
+    title: 'Strategic 5×5 Board',
+    description: 'Place cards on a 5×5 grid to control rows. Crystal placement expands your territory. Every move shapes the battlefield — pure tactical depth.',
+    stat: '25 tiles',
+    color: 'cyan',
+    svg: '<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>',
+  },
+  {
+    title: '4,276 Unique Cards',
+    description: '16 clans, 21 ability types, 5 rarities. From common frontline units to god-tier reality benders — every card has unique art and abilities.',
+    stat: '16 clans',
+    color: 'purple',
+    svg: '<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="4" width="14" height="18" rx="1"/><path d="M6 2h12a2 2 0 012 2v14"/><path d="M8 10h4m-4 4h6"/></svg>',
+  },
+  {
+    title: 'Shinpodo Schools',
+    description: 'Choose from 4 combat schools — Kazen (wind), Iwakami (stone), Seika (flame), Mizu (water). Each unlocks hero abilities and passive bonuses that define your playstyle.',
+    stat: '4 schools',
+    color: 'green',
+    svg: '<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="9"/><path d="M12 3v18M3 12h18"/><circle cx="12" cy="12" r="3"/></svg>',
+  },
+  {
+    title: 'Ranked Multiplayer',
+    description: 'Real-time WebSocket matches with ELO ranking. Climb the leaderboard, join clans, challenge friends. Server-authoritative — no cheating.',
+    stat: 'ELO ranked',
+    color: 'purple',
+    svg: '<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 9H4.5a2.5 2.5 0 010-5C7 4 6 9 6 9zm12 0h1.5a2.5 2.5 0 000-5C17 4 18 9 18 9z"/><path d="M4 22h16"/><path d="M10 22V8h4v14"/><path d="M8 9h8l-1 5H9L8 9z"/></svg>',
+  },
+  {
+    title: '6-Tier AI Agent',
+    description: 'Practice against AI opponents from Recruit (beginner) to Nightmare (full minimax with beam pruning). Master your strategy before entering ranked.',
+    stat: '6 tiers',
+    color: 'cyan',
+    svg: '<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="4" y="4" width="16" height="12" rx="2"/><path d="M9 20h6"/><path d="M12 16v4"/><circle cx="9" cy="10" r="1" fill="currentColor"/><circle cx="15" cy="10" r="1" fill="currentColor"/></svg>',
+  },
+  {
+    title: 'No Pay-to-Win',
+    description: 'Every single card is earnable through gameplay. Free-to-play means free-to-compete. Your skill is your only advantage.',
+    stat: '100% free',
+    color: 'green',
+    svg: '<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>',
+  },
+];
+
+const colorMap: Record<string, { icon: string; stat: string; badge: string; line: string; hover: string }> = {
+  cyan: {
+    icon: 'text-mm-cyan neon-text',
+    stat: 'glow-stat',
+    badge: 'border-mm-cyan/30',
+    line: 'via-mm-cyan/30',
+    hover: 'group-hover:text-mm-cyan',
+  },
+  purple: {
+    icon: 'text-[#a855f7]',
+    stat: 'glow-stat-purple',
+    badge: 'border-[#a855f7]/30',
+    line: 'via-[#a855f7]/30',
+    hover: 'group-hover:text-[#a855f7]',
+  },
+  green: {
+    icon: 'text-[#4ade80]',
+    stat: 'glow-stat-green',
+    badge: 'border-[#4ade80]/30',
+    line: 'via-[#4ade80]/30',
+    hover: 'group-hover:text-[#4ade80]',
+  },
+};
+---
+
+<section id="features" class="section-padding bg-mm-bg relative">
+  <div class="section-container">
+    <!-- Section Header -->
+    <div class="text-center mb-20 reveal">
+      <p class="font-rajdhani text-mm-cyan uppercase tracking-[0.3em] text-sm mb-3">Why Play</p>
+      <h2 class="text-3xl sm:text-4xl md:text-5xl font-orbitron neon-text mb-4">Game Features</h2>
+      <div class="section-divider mt-6"></div>
+    </div>
+
+    <!-- Feature Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {features.map((feature, i) => {
+        const c = colorMap[feature.color];
+        return (
+          <div class="reveal group relative bg-mm-card/50 border border-mm-elevated/50 p-8 card-hover" style={`transition-delay: ${i * 100}ms`}>
+            <!-- Icon -->
+            <div class={`${c.icon} mb-4`} style={feature.color === 'purple' ? 'filter: drop-shadow(0 0 8px rgba(168,85,247,0.6))' : feature.color === 'green' ? 'filter: drop-shadow(0 0 8px rgba(74,222,128,0.6))' : ''} set:html={feature.svg} />
+
+            <!-- Stat Badge -->
+            <span class={`absolute top-6 right-6 ${c.stat} text-xs uppercase tracking-wider border ${c.badge} px-3 py-1`}>
+              {feature.stat}
+            </span>
+
+            <!-- Text -->
+            <h3 class={`font-orbitron text-lg font-bold text-mm-text mb-3 tracking-wide ${c.hover} transition-colors`}>
+              {feature.title}
+            </h3>
+            <p class="font-exo text-mm-text2 text-sm leading-relaxed">
+              {feature.description}
+            </p>
+
+            <!-- Bottom glow line -->
+            <div class={`absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent ${c.line} to-transparent opacity-0 group-hover:opacity-100 transition-opacity`}></div>
+          </div>
+        );
+      })}
+    </div>
+  </div>
+</section>

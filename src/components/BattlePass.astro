@@ -1,0 +1,157 @@
+---
+const gameUrl = import.meta.env.PUBLIC_GAME_URL || 'https://rift.metamachina.io';
+
+const tiers = [
+  {
+    name: 'Free Tier',
+    price: 'FREE',
+    packs: 0,
+    boost: '1x',
+    dailyCap: '30 M-Credz/day',
+    sceneReward: 'None',
+    artifactReward: 'None',
+    foundersBadge: false,
+    highlight: false,
+    colorClass: 'text-mm-text2',
+    priceClass: 'text-mm-text2',
+  },
+  {
+    name: 'Rifter Pass',
+    price: '$20',
+    packs: 8,
+    boost: '1.05x',
+    dailyCap: 'Uncapped',
+    sceneReward: 'None',
+    artifactReward: 'None',
+    foundersBadge: false,
+    highlight: false,
+    colorClass: 'text-mm-cyan',
+    priceClass: 'glow-stat',
+  },
+  {
+    name: 'Commander Pass',
+    price: '$60',
+    packs: 25,
+    boost: '1.10x',
+    dailyCap: 'Uncapped',
+    sceneReward: '1 Epic Scene Card',
+    artifactReward: 'None',
+    foundersBadge: false,
+    highlight: true,
+    colorClass: 'accent-purple',
+    priceClass: 'accent-purple',
+    borderClass: 'border-purple neon-box-purple',
+    badgeBg: 'bg-[#a855f7]',
+  },
+  {
+    name: 'Founders Edition',
+    price: '$100',
+    packs: 45,
+    boost: '1.15x',
+    dailyCap: 'Uncapped',
+    sceneReward: '1 Legendary Scene',
+    artifactReward: '1 Rare Artifact',
+    foundersBadge: true,
+    highlight: false,
+    colorClass: 'glow-stat-gold',
+    priceClass: 'glow-stat-gold',
+    limited: 'Limited to 500',
+  },
+];
+---
+
+<section id="battlepass" class="section-padding bg-mm-bg2 relative">
+  <div class="section-container">
+    <!-- Section Header -->
+    <div class="text-center mb-16 reveal">
+      <p class="font-rajdhani text-mm-cyan uppercase tracking-[0.3em] text-sm mb-3">Power Up</p>
+      <h2 class="text-3xl sm:text-4xl md:text-5xl font-orbitron neon-text mb-4">Battle Pass</h2>
+      <p class="font-exo text-mm-text max-w-lg mx-auto">
+        Optional boosts for dedicated Rifters. The game is fully playable for free — Battle Pass just accelerates your collection.
+      </p>
+      <div class="section-divider mt-6"></div>
+    </div>
+
+    <!-- Tier Cards -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      {tiers.map((tier, i) => (
+        <div
+          class={`reveal relative bg-mm-card/50 border p-6 card-hover flex flex-col ${
+            tier.borderClass
+              ? tier.borderClass
+              : tier.highlight
+                ? 'border-[#a855f7]/50 neon-box-purple'
+                : 'border-mm-elevated/50'
+          }`}
+          style={`transition-delay: ${i * 100}ms`}
+        >
+          {tier.highlight && (
+            <div class={`absolute -top-3 left-1/2 -translate-x-1/2 ${tier.badgeBg || 'bg-mm-cyan'} text-mm-bg font-rajdhani text-xs font-bold uppercase tracking-widest px-4 py-1`}>
+              Popular
+            </div>
+          )}
+          {tier.limited && (
+            <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-mm-gold text-mm-bg font-rajdhani text-xs font-bold uppercase tracking-widest px-4 py-1">
+              {tier.limited}
+            </div>
+          )}
+
+          <h3 class={`font-orbitron text-sm font-bold ${tier.colorClass} mb-1 tracking-wider`}>
+            {tier.name}
+          </h3>
+          <p class={`font-orbitron text-3xl font-black ${tier.priceClass} mb-6`}>
+            {tier.price}
+          </p>
+
+          <ul class="space-y-3 flex-1 mb-6">
+            <li class="flex items-start gap-2 text-sm">
+              <span class="text-mm-cyan mt-0.5">&#10003;</span>
+              <span class="font-exo text-mm-text">{tier.packs > 0 ? `${tier.packs} Card Packs` : 'Starter Deck'}</span>
+            </li>
+            <li class="flex items-start gap-2 text-sm">
+              <span class="text-mm-cyan mt-0.5">&#10003;</span>
+              <span class="font-exo text-mm-text">{tier.boost} M-Credz Boost</span>
+            </li>
+            <li class="flex items-start gap-2 text-sm">
+              <span class="text-mm-cyan mt-0.5">&#10003;</span>
+              <span class="font-exo text-mm-text">{tier.dailyCap}</span>
+            </li>
+            {tier.sceneReward !== 'None' && (
+              <li class="flex items-start gap-2 text-sm">
+                <span class="text-mm-gold mt-0.5">&#9733;</span>
+                <span class="font-exo text-mm-text">{tier.sceneReward}</span>
+              </li>
+            )}
+            {tier.artifactReward !== 'None' && (
+              <li class="flex items-start gap-2 text-sm">
+                <span class="text-mm-gold mt-0.5">&#9733;</span>
+                <span class="font-exo text-mm-text">{tier.artifactReward}</span>
+              </li>
+            )}
+            {tier.foundersBadge && (
+              <li class="flex items-start gap-2 text-sm">
+                <span class="text-mm-gold mt-0.5">&#9733;</span>
+                <span class="font-exo text-mm-text">Exclusive Founder Badge</span>
+              </li>
+            )}
+          </ul>
+
+          {tier.price === 'FREE' ? (
+            <a
+              href={gameUrl}
+              target="_blank"
+              rel="noopener"
+              class="btn-primary btn-filled text-xs w-full text-center"
+            >
+              Play Free
+            </a>
+          ) : (
+            <span class="btn-disabled text-xs w-full text-center">
+              Coming Soon
+            </span>
+          )}
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
