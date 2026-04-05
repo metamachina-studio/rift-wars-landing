@@ -68,8 +68,8 @@ export default function Leaderboard() {
             onClick={() => setTab(t)}
             className={`px-6 py-2 font-orbitron text-sm uppercase tracking-wider border cursor-pointer transition-all
               ${t === tab
-                ? 'border-mm-cyan bg-mm-cyan/10 text-mm-cyan'
-                : 'border-mm-elevated text-mm-text2 hover:border-mm-cyan/30 bg-transparent'
+                ? 'border-mm-gold-primary bg-mm-gold-primary/10 text-mm-gold-primary'
+                : 'border-mm-elevated text-mm-text2 hover:border-mm-gold-primary/30 bg-transparent'
               }`}
           >
             {t}
@@ -79,7 +79,7 @@ export default function Leaderboard() {
 
       {loading ? (
         <div className="text-center py-16">
-          <div className="inline-block w-8 h-8 border-2 border-mm-cyan/30 border-t-mm-cyan rounded-full animate-spin" />
+          <div className="inline-block w-8 h-8 border-2 border-mm-gold-primary/30 border-t-mm-gold-primary rounded-full animate-spin" />
         </div>
       ) : tab === 'players' ? (
         <div className="overflow-x-auto">
@@ -104,10 +104,10 @@ export default function Leaderboard() {
                       {badge ? <span className={badge.cls}>{badge.emoji}</span> : rank}
                     </td>
                     <td className="py-3 px-2 font-exo text-mm-text font-semibold">{p.display_name}</td>
-                    <td className="py-3 px-2 text-right font-orbitron text-mm-cyan">{p.elo}</td>
+                    <td className="py-3 px-2 text-right font-orbitron text-mm-gold-primary">{p.elo}</td>
                     <td className="py-3 px-2 text-right font-rajdhani text-mm-text2 hidden sm:table-cell">{p.level}</td>
                     <td className="py-3 px-2 text-right font-exo text-mm-text2 hidden md:table-cell">
-                      <span className="text-mm-green">{p.wins}</span>
+                      <span className="text-mm-neon">{p.wins}</span>
                       <span className="text-mm-muted">/</span>
                       <span className="text-mm-red">{p.losses}</span>
                     </td>
@@ -146,10 +146,10 @@ export default function Leaderboard() {
                       <span className="font-exo text-mm-text font-semibold">{c.name}</span>
                       <span className="font-rajdhani text-mm-muted text-xs ml-2">[{c.tag}]</span>
                     </td>
-                    <td className="py-3 px-2 text-right font-orbitron text-mm-cyan">{c.level}</td>
+                    <td className="py-3 px-2 text-right font-orbitron text-mm-gold-primary">{c.level}</td>
                     <td className="py-3 px-2 text-right font-rajdhani text-mm-text2 hidden sm:table-cell">{c.member_count}</td>
                     <td className="py-3 px-2 text-right font-exo text-mm-text2 hidden md:table-cell">
-                      <span className="text-mm-green">{c.total_wins}</span>
+                      <span className="text-mm-neon">{c.total_wins}</span>
                       <span className="text-mm-muted">/</span>
                       <span className="text-mm-red">{c.total_losses}</span>
                     </td>

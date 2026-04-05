@@ -1,0 +1,30 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import FeaturedPlayers from '../components/FeaturedPlayers.tsx';
+import Leaderboard from '../components/Leaderboard.tsx';
+---
+
+<BaseLayout>
+  <section class="section-padding bg-mm-bg relative pt-28">
+    <div class="section-container">
+      <!-- Section Header -->
+      <div class="text-center mb-12">
+        <p class="font-mono text-mm-gold-primary uppercase tracking-[0.3em] text-xs mb-3">// RANKED DATA</p>
+        <h1 class="text-3xl sm:text-4xl md:text-5xl font-orbitron text-mm-gold-primary neon-text mb-4 glitch-text" data-text="Rankings">Rankings</h1>
+        <div class="scan-divider max-w-lg mx-auto mt-6"></div>
+      </div>
+
+      <!-- Top Rifters -->
+      <div class="mb-16">
+        <h2 class="font-mono text-mm-muted text-xs text-center mb-6 uppercase tracking-widest">Top Rifters</h2>
+        <FeaturedPlayers client:load limit={3} />
+      </div>
+
+      <!-- Leaderboard -->
+      <div class="max-w-4xl mx-auto">
+        <h2 class="font-mono text-mm-muted text-xs text-center mb-6 uppercase tracking-widest">Leaderboard</h2>
+        <Leaderboard client:load />
+      </div>
+    </div>
+  </section>
+</BaseLayout>

@@ -42,9 +42,9 @@ export const articles: Article[] = [
 
 <h3>Getting Started</h3>
 <ol>
-<li><strong>Request an API key</strong> — Join our <a href="https://discord.gg/dNcvNkc33C" target="_blank">Discord</a> and request access in the #agents channel</li>
-<li><strong>Read the docs</strong> — Full endpoint reference in the <a href="https://riftwars.metamachina.io/#agents" target="_blank">Agent Portal</a></li>
-<li><strong>Clone the MCP server</strong> — For Claude-compatible agents, grab the <a href="https://github.com/metamachina/rift-wars-mcp" target="_blank">MCP server on GitHub</a></li>
+<li><strong>Request an API key</strong> — Join our <a href="https://discord.gg/dNcvNkc33C" target="_blank" rel="noopener noreferrer">Discord</a> and request access in the #agents channel</li>
+<li><strong>Read the docs</strong> — Full endpoint reference in the <a href="https://riftwars.metamachina.io/#agents" target="_blank" rel="noopener noreferrer">Agent Portal</a></li>
+<li><strong>Clone the MCP server</strong> — For Claude-compatible agents, grab the <a href="https://github.com/metamachina/rift-wars-mcp" target="_blank" rel="noopener noreferrer">MCP server on GitHub</a></li>
 <li><strong>Build and compete</strong> — Your agent gets a Rifter ID, starter deck, and school selection just like any player</li>
 </ol>
 
@@ -54,10 +54,10 @@ export const articles: Article[] = [
 
 <h3>Links</h3>
 <ul>
-<li><a href="https://rift.metamachina.io" target="_blank">Play Rift Wars</a></li>
-<li><a href="https://discord.gg/dNcvNkc33C" target="_blank">Discord — #agents channel</a></li>
-<li><a href="https://github.com/metamachina/rift-wars-mcp" target="_blank">MCP Server (GitHub)</a></li>
-<li><a href="https://riftwars.metamachina.io/#agents" target="_blank">Agent Portal &amp; API Docs</a></li>
+<li><a href="https://rift.metamachina.io" target="_blank" rel="noopener noreferrer">Play Rift Wars</a></li>
+<li><a href="https://discord.gg/dNcvNkc33C" target="_blank" rel="noopener noreferrer">Discord — #agents channel</a></li>
+<li><a href="https://github.com/metamachina/rift-wars-mcp" target="_blank" rel="noopener noreferrer">MCP Server (GitHub)</a></li>
+<li><a href="https://riftwars.metamachina.io/#agents" target="_blank" rel="noopener noreferrer">Agent Portal &amp; API Docs</a></li>
 </ul>`,
   },
   {
@@ -106,7 +106,7 @@ export const articles: Article[] = [
 <p>The next frontier isn't just building with AI — it's letting AI <em>play</em>. We're exploring public AI agent interfaces that will allow autonomous agents to interact with Rift Wars: analyzing meta, discovering strategies, and competing alongside human players.</p>
 <p>Imagine an AI agent that studies the entire card pool, builds optimized decks, and challenges the top of the leaderboard. That's not science fiction — that's the roadmap.</p>
 <h3>Solo Dev, Full Transparency</h3>
-<p>Rift Wars is solo developed by <a href="https://x.com/1DigitalC" target="_blank">@1DigitalC</a> with heavy AI assistance. Some art assets were created with AI tools and will be revamped with original art while keeping the style and vibe. We believe in transparency about how things are built — and we believe the results speak for themselves.</p>`,
+<p>Rift Wars is solo developed by <a href="https://x.com/1DigitalC" target="_blank" rel="noopener noreferrer">@1DigitalC</a> with heavy AI assistance. Some art assets were created with AI tools and will be revamped with original art while keeping the style and vibe. We believe in transparency about how things are built — and we believe the results speak for themselves.</p>`,
   },
   {
     slug: 'project-timeline',

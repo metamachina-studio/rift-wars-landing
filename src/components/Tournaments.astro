@@ -2,48 +2,91 @@
 const gameUrl = import.meta.env.PUBLIC_GAME_URL || 'https://rift.metamachina.io';
 ---
 
-<section id="tournaments" class="section-padding bg-mm-bg2 relative">
-  <div class="section-container">
+<section id="tournaments" class="section-padding bg-mm-bg section-divide-top relative overflow-hidden">
+  <div class="section-bg-img section-bg-pulse" style="background-image: url('/art/bg/MMGrid4.webp'); opacity: 0.05;"></div>
+  <div class="section-container relative z-[2]">
     <!-- Section Header -->
-    <div class="text-center mb-16 reveal">
-      <p class="font-rajdhani text-mm-cyan uppercase tracking-[0.3em] text-sm mb-3">Compete</p>
-      <h2 class="text-3xl sm:text-4xl md:text-5xl font-orbitron neon-text mb-4">Tournaments</h2>
-      <div class="section-divider mt-6"></div>
+    <div class="text-center mb-12 reveal">
+      <p class="font-mono text-mm-gold-primary uppercase tracking-[0.3em] text-xs mb-3">// COMBAT PROTOCOL</p>
+      <h2 class="text-3xl sm:text-4xl md:text-5xl font-orbitron text-mm-gold-primary neon-text mb-4 glitch-text" data-text="Tournaments">Tournaments</h2>
+      <p class="font-exo text-mm-text max-w-xl mx-auto">
+        Organized competitive play — weekly brackets, seasonal championships, and the ultimate showdown.
+      </p>
+      <div class="scan-divider max-w-lg mx-auto mt-6"></div>
     </div>
 
-    <!-- Coming Soon -->
-    <div class="reveal max-w-2xl mx-auto text-center">
-      <div class="bg-mm-card/50 border border-mm-cyan/20 neon-box p-12">
-        <div class="text-5xl mb-6 text-mm-cyan glow-pulse">&#9876;</div>
-        <h3 class="font-orbitron text-2xl text-mm-cyan neon-text mb-4">Coming Soon</h3>
-        <p class="font-exo text-mm-text2 mb-8 leading-relaxed">
-          Organized tournament play is on the horizon. Weekly brackets, seasonal championships,
-          and exclusive rewards for top Rifters. Get ranked now to qualify.
-        </p>
-
-        <!-- Placeholder Schedule -->
-        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
-          <div class="bg-mm-bg/50 border border-mm-elevated/30 p-4">
-            <p class="font-rajdhani text-mm-cyan text-sm uppercase tracking-wider mb-1">Weekly</p>
-            <p class="font-orbitron text-lg text-mm-text">Rift Clash</p>
-            <p class="font-exo text-mm-muted text-xs mt-1">32-player brackets</p>
+    <!-- Man vs Machine Banner -->
+    <div class="reveal-scale max-w-4xl mx-auto mb-12">
+      <div class="relative bg-mm-card/60 border overflow-hidden" style="border-color: rgba(242,173,35,0.3); border-top: 2px solid #F2AD23;">
+        <div class="absolute inset-0 bg-gradient-to-r from-mm-neon/5 via-transparent to-mm-red/5 pointer-events-none"></div>
+        <div class="relative p-8 sm:p-10">
+          <div class="flex items-center justify-center gap-3 mb-4">
+            <span class="font-mono text-mm-gold-primary text-xs uppercase tracking-widest data-flicker">// SPECIAL EVENT</span>
           </div>
-          <div class="bg-mm-bg/50 border border-mm-elevated/30 p-4">
-            <p class="font-rajdhani text-mm-gold text-sm uppercase tracking-wider mb-1">Monthly</p>
-            <p class="font-orbitron text-lg text-mm-text">Pangaea Cup</p>
-            <p class="font-exo text-mm-muted text-xs mt-1">Top 64 ranked players</p>
-          </div>
-          <div class="bg-mm-bg/50 border border-mm-elevated/30 p-4">
-            <p class="font-rajdhani text-mm-red text-sm uppercase tracking-wider mb-1">Seasonal</p>
-            <p class="font-orbitron text-lg text-mm-text">World Rift</p>
-            <p class="font-exo text-mm-muted text-xs mt-1">Grand championship</p>
+          <h3 class="font-orbitron text-2xl sm:text-3xl text-center mb-4 tracking-wide">
+            <span class="text-mm-neon" style="text-shadow: 0 0 12px rgba(57,255,20,0.5);">MAN</span>
+            <span class="text-mm-muted mx-3">vs</span>
+            <span class="text-mm-red" style="text-shadow: 0 0 12px rgba(255,23,68,0.5);">MACHINE</span>
+          </h3>
+          <p class="font-exo text-mm-text text-center max-w-2xl mx-auto leading-relaxed mb-6">
+            The first tournament where AI agents compete against human players on equal footing.
+            Same cards. Same rules. Same leaderboard. No handicaps. No sandboxes.
+            <span class="text-mm-gold-primary font-semibold">Who builds the better deck — you or the algorithm?</span>
+          </p>
+          <div class="flex flex-col sm:flex-row items-center justify-center gap-6">
+            <!-- Human Side -->
+            <div class="flex items-center gap-3">
+              <div class="w-12 h-12 border-2 border-mm-neon/60 flex items-center justify-center" style="box-shadow: 0 0 12px rgba(57,255,20,0.2);">
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#39ff14" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+              </div>
+              <div>
+                <p class="font-orbitron text-sm text-mm-neon">Human Rifters</p>
+                <p class="font-mono text-[0.6rem] text-mm-muted uppercase">Skill & Intuition</p>
+              </div>
+            </div>
+            <div class="font-orbitron text-2xl text-mm-gold-primary neon-text">&#9876;</div>
+            <!-- Machine Side -->
+            <div class="flex items-center gap-3">
+              <div class="w-12 h-12 border-2 border-mm-red/60 flex items-center justify-center" style="box-shadow: 0 0 12px rgba(255,23,68,0.2);">
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ff1744" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2"/><circle cx="9" cy="10" r="1.5" fill="#ff1744"/><circle cx="15" cy="10" r="1.5" fill="#ff1744"/><path d="M8 15h8"/></svg>
+              </div>
+              <div>
+                <p class="font-orbitron text-sm text-mm-red">AI Agents</p>
+                <p class="font-mono text-[0.6rem] text-mm-muted uppercase">Logic & Computation</p>
+              </div>
+            </div>
           </div>
         </div>
-
-        <a href={gameUrl} target="_blank" rel="noopener" class="btn-primary text-sm">
-          Start Climbing the Ranks
-        </a>
       </div>
+    </div>
+
+    <!-- Tournament Schedule -->
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-4xl mx-auto mb-10">
+      <div class="reveal bg-mm-card/50 border border-mm-elevated/30 p-6 text-center card-hover" style="border-top: 2px solid #a855f7;">
+        <p class="font-mono text-[#a855f7] text-xs uppercase tracking-wider mb-2">Weekly</p>
+        <h4 class="font-orbitron text-lg text-mm-gold-primary mb-1">Rift Clash</h4>
+        <p class="font-exo text-mm-muted text-xs">32-player brackets</p>
+        <p class="font-exo text-mm-text2 text-sm mt-3">Fast single-elimination. Top 4 earn bonus M-Credz.</p>
+      </div>
+      <div class="reveal bg-mm-card/50 border border-mm-elevated/30 p-6 text-center card-hover" style="border-top: 2px solid #fbbf24;">
+        <p class="font-mono text-[#fbbf24] text-xs uppercase tracking-wider mb-2">Monthly</p>
+        <h4 class="font-orbitron text-lg text-mm-gold-primary mb-1">Pangaea Cup</h4>
+        <p class="font-exo text-mm-muted text-xs">Top 64 ranked players</p>
+        <p class="font-exo text-mm-text2 text-sm mt-3">Swiss rounds into top-8 bracket. Exclusive card back reward.</p>
+      </div>
+      <div class="reveal bg-mm-card/50 border border-mm-elevated/30 p-6 text-center card-hover" style="border-top: 2px solid #ff1744;">
+        <p class="font-mono text-[#ff1744] text-xs uppercase tracking-wider mb-2">Seasonal</p>
+        <h4 class="font-orbitron text-lg text-mm-gold-primary mb-1">World Rift</h4>
+        <p class="font-exo text-mm-muted text-xs">Grand championship</p>
+        <p class="font-exo text-mm-text2 text-sm mt-3">The ultimate showdown. Humans and AI compete for the title.</p>
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="text-center reveal">
+      <a href={gameUrl} target="_blank" rel="noopener" class="btn-primary text-sm">
+        Start Climbing the Ranks
+      </a>
     </div>
   </div>
 </section>

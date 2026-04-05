@@ -32,14 +32,14 @@ const formattedDate = new Date(article.date).toLocaleDateString('en-US', {
       loading="lazy"
     />
     <div class="absolute inset-0 bg-gradient-to-t from-mm-bg to-transparent"></div>
-    <span class="absolute bottom-3 left-4 font-rajdhani text-xs text-mm-cyan uppercase tracking-wider">
+    <span class="absolute bottom-3 left-4 font-mono text-xs text-mm-gold-primary uppercase tracking-wider">
       {formattedDate}
     </span>
   </div>
 
   <!-- Content -->
   <div class="p-5">
-    <h3 class="font-orbitron text-sm font-bold text-mm-text mb-2 group-hover:text-mm-cyan transition-colors tracking-wide leading-tight">
+    <h3 class="font-orbitron text-sm font-bold text-mm-text mb-2 group-hover:text-mm-gold-primary transition-colors tracking-wide leading-tight">
       {article.title}
     </h3>
     <p class="font-exo text-mm-text2 text-sm leading-relaxed line-clamp-2">

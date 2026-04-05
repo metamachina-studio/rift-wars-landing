@@ -1,208 +1,146 @@
 ---
 import { CLAN_TAGLINES, CLAN_COLORS, ALL_CLANS } from '../lib/clans';
+const gameUrl = import.meta.env.PUBLIC_GAME_URL || 'https://rift.metamachina.io';
 ---
 
-<section id="lore" class="relative overflow-hidden">
+<section id="lore" class="relative overflow-hidden section-divide-top">
   <!-- Video Background -->
   <div class="absolute inset-0">
     <video autoplay muted loop playsinline class="w-full h-full object-cover">
       <source src="/video/wasteland.mp4" type="video/mp4" />
     </video>
-    <div class="absolute inset-0 bg-gradient-to-b from-mm-bg via-mm-bg/80 to-mm-bg"></div>
+    <div class="absolute inset-0 bg-gradient-to-b from-mm-bg via-mm-bg/85 to-mm-bg"></div>
   </div>
 
   <div class="relative z-10 section-padding">
     <div class="section-container">
       <!-- Section Header -->
-      <div class="text-center mb-20 reveal">
-        <p class="font-rajdhani text-mm-cyan uppercase tracking-[0.3em] text-sm mb-3">The World</p>
-        <h2 class="text-3xl sm:text-4xl md:text-5xl font-orbitron neon-text mb-4">Pangaea III</h2>
-        <div class="section-divider mt-6"></div>
+      <div class="text-center mb-12 reveal">
+        <p class="font-mono text-mm-gold-primary uppercase tracking-[0.3em] text-xs mb-3">// WORLD DATA</p>
+        <h2 class="text-3xl sm:text-4xl md:text-5xl font-orbitron text-mm-gold-primary neon-text mb-4 glitch-text" data-text="Pangaea III">Pangaea III</h2>
+        <div class="scan-divider max-w-lg mx-auto mt-6"></div>
       </div>
 
-      <!-- Lore Blocks -->
-      <div class="space-y-24">
-        <!-- The World -->
-        <div class="reveal grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          <div>
-            <h3 class="font-orbitron text-2xl text-mm-cyan neon-text mb-4">The Last Megacity</h3>
-            <p class="font-exo text-mm-text leading-relaxed mb-4">
-              Invictus — humanity's last megacity. <span class="glow-stat text-lg">9 million</span> souls crammed behind reinforced walls
-              while <span class="glow-stat text-lg">3 million</span> more scatter across the lawless Wasteland beyond. Resources are scarce.
-              Power is everything.
-            </p>
-            <blockquote class="font-orbitron text-sm italic text-mm-cyan/80 border-l-2 border-mm-cyan/40 pl-4">
-              "In Invictus, you survive. In the Wasteland, you become."
-            </blockquote>
-          </div>
-          <div class="relative aspect-video bg-mm-card/30 border border-mm-elevated/30 overflow-hidden">
-            <img src="/art/environments/invictus-skyline.webp" alt="Invictus - The Last Megacity" class="w-full h-full object-cover opacity-80" />
-            <div class="absolute inset-0 bg-gradient-to-r from-mm-bg/40 to-transparent"></div>
-          </div>
-        </div>
+      <!-- Lore Summary -->
+      <div class="reveal max-w-3xl mx-auto text-center mb-16">
+        <p class="font-exo text-mm-text leading-relaxed text-base">
+          <span class="glow-stat-red text-lg">Invictus</span> — humanity's last megacity.
+          <span class="glow-stat text-lg">9 million</span> souls behind reinforced walls while
+          <span class="glow-stat text-lg">3 million</span> scatter across the lawless Wasteland.
+          Dimensional tears called <span class="glow-stat-red text-lg">The Rifts</span> rip through
+          reality — inside them, <span class="glow-stat-gold text-lg">Meta Crystals</span> form,
+          the most valuable resource on Pangaea III. Sixteen clans wage war for control.
+          Step through a rift and you might return a god — or not return at all.
+        </p>
+      </div>
 
-        <!-- The Rifts -->
-        <div class="reveal grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          <div class="order-2 lg:order-1 relative aspect-video bg-mm-card/30 border border-mm-elevated/30 overflow-hidden">
-            <img src="/art/environments/rift-portal.webp" alt="The Rifts" class="w-full h-full object-cover opacity-80" />
-            <div class="absolute inset-0 bg-gradient-to-l from-mm-bg/40 to-transparent"></div>
-          </div>
-          <div class="order-1 lg:order-2">
-            <h3 class="font-orbitron text-2xl text-mm-cyan neon-text mb-4">The Rifts</h3>
-            <p class="font-exo text-mm-text leading-relaxed mb-4">
-              Dimensional tears where time fractures and physics crumbles. The Rifts appeared without
-              warning — gaping wounds in reality itself. Inside, Meta Crystals form — the most valuable
-              resource on Pangaea III.
-            </p>
-            <blockquote class="font-orbitron text-sm italic text-mm-cyan/80 border-l-2 border-mm-cyan/40 pl-4">
-              "Step through a rift and you might return a god — or not return at all."
-            </blockquote>
-          </div>
-        </div>
-
-        <!-- M-Credz -->
-        <div class="reveal grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          <div>
-            <h3 class="font-orbitron text-2xl mb-4 glow-stat-gold">M-Credz</h3>
-            <p class="font-exo text-mm-text leading-relaxed mb-4">
-              Digital currency backed by Meta Crystal energy. Earned through combat, spent on power.
-              <span class="glow-stat-gold">1 M-Cred = $0.01 USD.</span> Free players earn up to
-              <span class="glow-stat-gold text-lg">30 M-Credz</span> daily through ranked matches.
-              Battle Pass holders earn uncapped — grind as long as you want.
-            </p>
-            <div class="flex gap-6 mt-4">
-              <div class="text-center">
-                <span class="glow-stat-gold text-3xl">7</span>
-                <p class="font-rajdhani text-xs text-mm-text2 uppercase">Per Win</p>
-              </div>
-              <div class="text-center">
-                <span class="glow-stat-gold text-3xl">2</span>
-                <p class="font-rajdhani text-xs text-mm-text2 uppercase">Per Loss</p>
-              </div>
-              <div class="text-center">
-                <span class="glow-stat-gold text-3xl">30</span>
-                <p class="font-rajdhani text-xs text-mm-text2 uppercase">Daily Cap (Free)</p>
-              </div>
-              <div class="text-center">
-                <span class="glow-stat-gold text-3xl">&infin;</span>
-                <p class="font-rajdhani text-xs text-mm-text2 uppercase">Battle Pass</p>
-              </div>
+      <!-- 16 Clans Grid -->
+      <div class="reveal-scale mb-16">
+        <h3 class="font-orbitron text-lg text-mm-text text-center mb-6 tracking-wide">16 Clans of Pangaea III</h3>
+        <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-3">
+          {ALL_CLANS.map((clan, i) => (
+            <div
+              class={`bg-mm-card/60 border border-mm-elevated/40 p-3 text-center card-hover reveal-scale stagger-${Math.min(i % 6 + 1, 6)}`}
+              style={`border-top: 2px solid ${CLAN_COLORS[clan]}`}
+            >
+              <h4 class="font-orbitron text-[0.65rem] font-bold tracking-wide mb-1" style={`color: ${CLAN_COLORS[clan]}; text-shadow: 0 0 8px ${CLAN_COLORS[clan]}40`}>
+                {clan}
+              </h4>
+              <p class="font-exo text-mm-muted text-[0.6rem] leading-tight">
+                {CLAN_TAGLINES[clan]}
+              </p>
             </div>
-            <p class="font-rajdhani text-mm-red text-xs uppercase tracking-wider mt-4 border border-mm-red/30 bg-mm-red/5 px-3 py-2 rounded">
-              M-Credz are currently in-game only (beta). On-chain token launch has not occurred yet. All values shown are subject to change.
-            </p>
-          </div>
-          <div class="relative flex items-center justify-center p-8">
-            <img src="/art/vendor-machine.webp" alt="M-Credz Vendor Machine" class="w-auto h-64 sm:h-80 object-contain drop-shadow-[0_0_30px_rgba(168,85,247,0.4)]" />
-          </div>
+          ))}
         </div>
+      </div>
 
-        <!-- The Clans -->
-        <div class="reveal">
-          <div class="text-center mb-10">
-            <h3 class="font-orbitron text-2xl text-mm-cyan neon-text mb-4">16 Clans</h3>
-            <p class="font-exo text-mm-text max-w-lg mx-auto">
-              Factions forged in war, bound by ideology. Each clan fights for control of Pangaea III.
-            </p>
-          </div>
-          <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
-            {ALL_CLANS.map(clan => (
-              <div
-                class="bg-mm-card/60 border border-mm-elevated/40 p-5 text-center card-hover"
-                style={`border-top: 3px solid ${CLAN_COLORS[clan]}`}
-              >
-                <h4 class="font-orbitron text-sm font-bold tracking-wide mb-1.5" style={`color: ${CLAN_COLORS[clan]}; text-shadow: 0 0 8px ${CLAN_COLORS[clan]}40`}>
-                  {clan}
-                </h4>
-                <p class="font-exo text-mm-text2 text-xs leading-tight">
-                  {CLAN_TAGLINES[clan]}
-                </p>
+      <!-- Hero Portraits -->
+      <div class="reveal grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-16">
+        <div class="order-2 lg:order-1">
+          <div class="grid grid-cols-3 gap-3">
+            {[
+              '/art/portraits/hero-1.webp',
+              '/art/portraits/hero-2.webp',
+              '/art/portraits/hero-3.webp',
+              '/art/portraits/hero-4.webp',
+              '/art/portraits/hero-5.webp',
+              '/art/portraits/hero-6.webp',
+            ].map(src => (
+              <div class="aspect-square bg-mm-card/40 border border-mm-elevated/30 overflow-hidden card-hover">
+                <img src={src} alt="Hero Portrait" class="w-full h-full object-cover" />
               </div>
             ))}
           </div>
         </div>
-
-        <!-- Hero Portraits -->
-        <div class="reveal grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          <div class="order-2 lg:order-1">
-            <div class="grid grid-cols-3 gap-3">
-              {[
-                '/art/portraits/hero-1.webp',
-                '/art/portraits/hero-2.webp',
-                '/art/portraits/hero-3.webp',
-                '/art/portraits/hero-4.webp',
-                '/art/portraits/hero-5.webp',
-                '/art/portraits/hero-6.webp',
-              ].map(src => (
-                <div class="aspect-square bg-mm-card/40 border border-mm-elevated/30 overflow-hidden card-hover">
-                  <img src={src} alt="Hero Portrait" class="w-full h-full object-cover" />
-                </div>
-              ))}
-            </div>
-          </div>
-          <div class="order-1 lg:order-2">
-            <h3 class="font-orbitron text-2xl text-mm-cyan neon-text mb-4">
-              <span class="glow-stat text-3xl">4,000+</span> Hero Portraits
-            </h3>
-            <p class="font-exo text-mm-text leading-relaxed mb-4">
-              Claim a unique hero portrait as your own. Every card in your collection doubles as a profile
-              avatar — express your identity on the battlefield. From hardened Chimps to sentient AI constructs,
-              find the face that represents your Rifter.
-            </p>
-            <p class="font-exo text-mm-text2 text-sm">
-              Your portrait. Your identity. Earned through gameplay.
-            </p>
-          </div>
-        </div>
-
-        <!-- Animated Hero Portraits -->
-        <div class="reveal mt-16">
-          <div class="text-center mb-8">
-            <h3 class="font-orbitron text-2xl mb-4">
-              <span class="glow-stat-purple">Special Animated</span>
-              <span class="text-mm-text"> Hero Portraits</span>
-            </h3>
-            <p class="font-exo text-mm-text leading-relaxed max-w-2xl mx-auto mb-2">
-              Show off your persona with premium animated portraits. Living, breathing hero art
-              that moves on your profile card — stand out in every lobby and leaderboard.
-            </p>
-            <p class="font-rajdhani text-[#a855f7]/80 text-sm uppercase tracking-widest">
-              Available for purchase with M-Credz
-            </p>
-          </div>
-          <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
-            {[1, 2, 3, 4, 5, 6].map(n => (
-              <div class="relative aspect-[3/4] bg-mm-card/40 border border-[#a855f7]/30 overflow-hidden card-hover group" style="box-shadow: 0 0 15px rgba(168,85,247,0.1)">
-                <video
-                  autoplay
-                  muted
-                  loop
-                  playsinline
-                  class="w-full h-full object-cover"
-                >
-                  <source src={`/video/portraits/hero-${n}.webm`} type="video/webm" />
-                </video>
-                <div class="absolute inset-0 border-2 border-transparent group-hover:border-[#a855f7]/60 transition-colors pointer-events-none"></div>
-                <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-2">
-                  <span class="font-rajdhani text-[10px] text-[#a855f7] uppercase tracking-wider font-bold">Animated</span>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        <!-- Universe Connection -->
-        <div class="reveal text-center py-10">
-          <p class="font-rajdhani text-mm-text2 uppercase tracking-widest text-sm mb-4">Part of a Larger Universe</p>
-          <h3 class="font-orbitron text-2xl text-mm-cyan neon-text mb-4">The Meta Machina Universe</h3>
-          <p class="font-exo text-mm-text max-w-xl mx-auto mb-6">
-            Rift Wars is your entry point into Pangaea III. The same world, the same factions,
-            the same war — experienced through strategic card combat.
+        <div class="order-1 lg:order-2">
+          <h3 class="font-orbitron text-2xl text-mm-gold-primary neon-text mb-4">
+            <span class="glow-stat text-3xl">4,000+</span> Hero Portraits
+          </h3>
+          <p class="font-exo text-mm-text leading-relaxed mb-4">
+            Claim a unique hero portrait as your own. Every card in your collection doubles as a profile
+            avatar — express your identity on the battlefield. From hardened Chimps to sentient AI constructs,
+            find the face that represents your Rifter.
           </p>
-          <a href="https://metamachina.io" target="_blank" rel="noopener" class="btn-primary text-sm">
-            Explore the Universe
-          </a>
+          <p class="font-exo text-mm-text2 text-sm">
+            Your portrait. Your identity. Earned through gameplay.
+          </p>
         </div>
+      </div>
+
+      <!-- Animated Hero Portraits -->
+      <div class="reveal mb-16">
+        <div class="text-center mb-8">
+          <h3 class="font-orbitron text-2xl mb-4">
+            <span class="glow-stat-purple">Special Animated</span>
+            <span class="text-mm-text"> Hero Portraits</span>
+          </h3>
+          <p class="font-exo text-mm-text leading-relaxed max-w-2xl mx-auto mb-2">
+            Show off your persona with premium animated portraits. Living, breathing hero art
+            that moves on your profile card — stand out in every lobby and leaderboard.
+          </p>
+          <p class="font-rajdhani text-[#a855f7]/80 text-sm uppercase tracking-widest">
+            Available for purchase with M-Credz
+          </p>
+        </div>
+        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
+          {[1, 2, 3, 4, 5, 6].map(n => (
+            <div class="relative aspect-[3/4] bg-mm-card/40 border border-[#a855f7]/30 overflow-hidden card-hover group" style="box-shadow: 0 0 15px rgba(168,85,247,0.1)">
+              <video
+                autoplay
+                muted
+                loop
+                playsinline
+                class="w-full h-full object-cover"
+              >
+                <source src={`/video/portraits/hero-${n}.webm`} type="video/webm" />
+              </video>
+              <div class="absolute inset-0 border-2 border-transparent group-hover:border-[#a855f7]/60 transition-colors pointer-events-none"></div>
+              <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-2">
+                <span class="font-rajdhani text-[10px] text-[#a855f7] uppercase tracking-wider font-bold">Animated</span>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- Universe Connection -->
+      <div class="reveal text-center py-10">
+        <p class="font-rajdhani text-mm-text2 uppercase tracking-widest text-sm mb-4">Part of a Larger Universe</p>
+        <h3 class="font-orbitron text-2xl text-mm-gold-primary neon-text mb-4">The Meta Machina Universe</h3>
+        <p class="font-exo text-mm-text max-w-xl mx-auto mb-6">
+          Rift Wars is your entry point into Pangaea III. The same world, the same factions,
+          the same war — experienced through strategic card combat.
+        </p>
+        <a href="https://metamachina.io" target="_blank" rel="noopener" class="btn-primary text-sm">
+          Explore the Universe
+        </a>
+      </div>
+
+      <!-- CTA -->
+      <div class="text-center mt-8 reveal">
+        <a href={gameUrl} target="_blank" rel="noopener" class="btn-primary text-sm">
+          Enter the Rift
+        </a>
       </div>
     </div>
   </div>

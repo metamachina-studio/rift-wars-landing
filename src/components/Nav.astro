@@ -6,7 +6,7 @@ const navLinks = [
   { label: 'Cards', href: '#cards' },
   { label: 'Lore', href: '#lore' },
   { label: 'News', href: '#news' },
-  { label: 'Rankings', href: '#rankings' },
+  { label: 'Rankings', href: '/rankings' },
   { label: 'Shop', href: '#shop' },
   { label: 'Battle Pass', href: '#battlepass' },
   { label: 'Agents', href: '#agents' },
@@ -17,8 +17,7 @@ const navLinks = [
   <div class="max-w-[1400px] mx-auto px-6 h-16 flex items-center justify-between">
     <!-- Logo -->
     <a href="/" class="flex items-center gap-2 z-10">
-      <img src="/rift-wars-logo-small.webp" alt="MRW" class="h-8" />
-      <img src="/rift-wars-wordmark.webp" alt="Rift Wars" class="h-3 hidden sm:inline" style="filter: contrast(1.3) brightness(1.1);" />
+      <img src="/RiftWarsLogo.webp" alt="Rift Wars" class="h-8" style="filter: drop-shadow(0 0 8px rgba(242,173,35,0.3));" />
     </a>
 
     <!-- Desktop Nav -->
@@ -26,7 +25,7 @@ const navLinks = [
       {navLinks.map((link) => (
         <a
           href={link.href}
-          class="font-rajdhani font-semibold text-sm uppercase tracking-wider text-mm-text2 hover:text-mm-cyan transition-colors duration-200"
+          class="font-mono font-medium text-xs uppercase tracking-wider text-mm-text2 hover:text-mm-gold-primary transition-colors duration-200"
         >
           {link.label}
         </a>
@@ -56,7 +55,7 @@ const navLinks = [
       {navLinks.map((link) => (
         <a
           href={link.href}
-          class="mobile-link font-rajdhani font-semibold text-xl uppercase tracking-wider text-mm-text2 hover:text-mm-cyan transition-colors"
+          class="mobile-link font-mono font-medium text-lg uppercase tracking-wider text-mm-text2 hover:text-mm-gold-primary transition-colors"
         >
           {link.label}
         </a>
@@ -71,12 +70,12 @@ const navLinks = [
 <style>
   header {
     backdrop-filter: blur(12px);
-    background: rgba(5, 5, 16, 0.8);
-    border-bottom: 1px solid rgba(0, 229, 255, 0.08);
+    background: rgba(0, 0, 0, 0.8);
+    border-bottom: 1px solid rgba(242, 173, 35, 0.08);
   }
   header.scrolled {
-    background: rgba(5, 5, 16, 0.95);
-    border-bottom-color: rgba(0, 229, 255, 0.15);
+    background: rgba(0, 0, 0, 0.95);
+    border-bottom-color: rgba(242, 173, 35, 0.15);
   }
   #hamburger.open span:nth-child(1) {
     transform: translateY(4px) rotate(45deg);

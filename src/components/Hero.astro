@@ -1,6 +1,4 @@
 ---
-import PlayerCount from './PlayerCount.tsx';
-
 const gameUrl = import.meta.env.PUBLIC_GAME_URL || 'https://rift.metamachina.io';
 ---
 
@@ -32,27 +30,27 @@ const gameUrl = import.meta.env.PUBLIC_GAME_URL || 'https://rift.metamachina.io'
       class="w-auto h-24 sm:h-32 md:h-[10rem] mx-auto mb-4"
     />
 
-    <!-- Rift Wars Wordmark -->
+    <!-- Rift Wars Logo -->
     <img
-      src="/rift-wars-wordmark.webp"
+      src="/RiftWarsLogo.webp"
       alt="RIFT WARS"
-      class="h-10 sm:h-14 md:h-20 mx-auto mb-6"
-      style="filter: drop-shadow(0 0 20px rgba(255,23,68,0.4)) drop-shadow(0 0 60px rgba(255,23,68,0.2));"
+      class="h-12 sm:h-16 md:h-24 mx-auto mb-12"
+      style="filter: drop-shadow(0 0 20px rgba(242,173,35,0.4)) drop-shadow(0 0 60px rgba(242,173,35,0.2));"
     />
     <p class="font-rajdhani text-xl sm:text-2xl md:text-3xl text-mm-text2 uppercase tracking-widest mb-2">
       Free-to-Play Tactical Card Game
     </p>
-    <p class="font-exo text-mm-text/90 text-base sm:text-lg max-w-2xl mx-auto mb-10 leading-relaxed">
-      <span class="glow-stat text-xl">4,276</span> unique cards.
-      <span class="glow-stat text-xl">16</span> clans.
-      <span class="glow-stat text-xl">21</span> ability types.
-      Strategic <span class="glow-stat text-xl">5&times;5</span> board control.
+    <p class="font-exo text-mm-text/90 text-base sm:text-lg max-w-2xl mx-auto mb-12 leading-relaxed">
+      <span class="glow-stat-green text-xl">4,276</span> unique cards.
+      <span class="glow-stat-green text-xl">16</span> clans.
+      <span class="glow-stat-green text-xl">21</span> ability types.
+      Strategic <span class="glow-stat-green text-xl">5&times;5</span> board control.
       Every card earnable. Skill wins. No pay-to-win.
     </p>
 
     <!-- CTAs -->
     <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
-      <a href={gameUrl} target="_blank" rel="noopener" class="btn-primary btn-filled text-base px-10 py-4" style="box-shadow: 0 0 30px rgba(0,229,255,0.4), 0 0 60px rgba(0,229,255,0.2);">
+      <a href={gameUrl} target="_blank" rel="noopener" class="btn-primary btn-filled text-base px-10 py-4">
         Play Free
       </a>
       <button id="watch-gameplay-btn" class="btn-primary text-base px-10 py-4 flex items-center gap-2">
@@ -68,21 +66,18 @@ const gameUrl = import.meta.env.PUBLIC_GAME_URL || 'https://rift.metamachina.io'
     <div id="video-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/90 backdrop-blur-sm">
       <div class="relative w-full max-w-4xl mx-4">
         <button id="close-video-btn" class="absolute -top-10 right-0 text-white/70 hover:text-white text-2xl font-bold cursor-pointer">&times;</button>
-        <video id="gameplay-video" controls class="w-full rounded-lg shadow-2xl" style="box-shadow: 0 0 60px rgba(0,229,255,0.3);">
+        <video id="gameplay-video" controls class="w-full rounded-lg shadow-2xl" style="box-shadow: 0 0 60px rgba(242,173,35,0.3);">
           <source src="/video/how-to-play.mp4" type="video/mp4" />
         </video>
       </div>
     </div>
-
-    <!-- Live Player Count -->
-    <PlayerCount client:load />
   </div>
 
-  <!-- Scroll Indicator -->
-  <div class="absolute bottom-8 left-1/2 -translate-x-1/2 z-10">
-    <div class="w-6 h-10 border-2 border-mm-cyan/30 rounded-full flex items-start justify-center p-1">
-      <div class="w-1.5 h-3 bg-mm-cyan/50 rounded-full animate-bounce"></div>
-    </div>
+  <!-- Scroll Indicator — Gold Chevron Pulse -->
+  <div class="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 chevron-pulse">
+    <span>&#9660;</span>
+    <span>&#9660;</span>
+    <span>&#9660;</span>
   </div>
 </section>
 

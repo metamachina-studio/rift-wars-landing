@@ -1,110 +1,226 @@
 ---
-const features = [
-  {
-    title: 'Strategic 5×5 Board',
-    description: 'Place cards on a 5×5 grid to control rows. Crystal placement expands your territory. Every move shapes the battlefield — pure tactical depth.',
-    stat: '25 tiles',
-    color: 'cyan',
-    svg: '<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>',
-  },
-  {
-    title: '4,276 Unique Cards',
-    description: '16 clans, 21 ability types, 5 rarities. From common frontline units to god-tier reality benders — every card has unique art and abilities.',
-    stat: '16 clans',
-    color: 'purple',
-    svg: '<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="4" width="14" height="18" rx="1"/><path d="M6 2h12a2 2 0 012 2v14"/><path d="M8 10h4m-4 4h6"/></svg>',
-  },
-  {
-    title: 'Shinpodo Schools',
-    description: 'Choose from 4 combat schools — Kazen (wind), Iwakami (stone), Seika (flame), Mizu (water). Each unlocks hero abilities and passive bonuses that define your playstyle.',
-    stat: '4 schools',
-    color: 'green',
-    svg: '<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="9"/><path d="M12 3v18M3 12h18"/><circle cx="12" cy="12" r="3"/></svg>',
-  },
-  {
-    title: 'Ranked Multiplayer',
-    description: 'Real-time WebSocket matches with ELO ranking. Climb the leaderboard, join clans, challenge friends. Server-authoritative — no cheating.',
-    stat: 'ELO ranked',
-    color: 'purple',
-    svg: '<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 9H4.5a2.5 2.5 0 010-5C7 4 6 9 6 9zm12 0h1.5a2.5 2.5 0 000-5C17 4 18 9 18 9z"/><path d="M4 22h16"/><path d="M10 22V8h4v14"/><path d="M8 9h8l-1 5H9L8 9z"/></svg>',
-  },
-  {
-    title: '6-Tier AI Agent',
-    description: 'Practice against AI opponents from Recruit (beginner) to Nightmare (full minimax with beam pruning). Master your strategy before entering ranked.',
-    stat: '6 tiers',
-    color: 'cyan',
-    svg: '<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="4" y="4" width="16" height="12" rx="2"/><path d="M9 20h6"/><path d="M12 16v4"/><circle cx="9" cy="10" r="1" fill="currentColor"/><circle cx="15" cy="10" r="1" fill="currentColor"/></svg>',
-  },
-  {
-    title: 'No Pay-to-Win',
-    description: 'Every single card is earnable through gameplay. Free-to-play means free-to-compete. Your skill is your only advantage.',
-    stat: '100% free',
-    color: 'green',
-    svg: '<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>',
-  },
-];
-
-const colorMap: Record<string, { icon: string; stat: string; badge: string; line: string; hover: string }> = {
-  cyan: {
-    icon: 'text-mm-cyan neon-text',
-    stat: 'glow-stat',
-    badge: 'border-mm-cyan/30',
-    line: 'via-mm-cyan/30',
-    hover: 'group-hover:text-mm-cyan',
-  },
-  purple: {
-    icon: 'text-[#a855f7]',
-    stat: 'glow-stat-purple',
-    badge: 'border-[#a855f7]/30',
-    line: 'via-[#a855f7]/30',
-    hover: 'group-hover:text-[#a855f7]',
-  },
-  green: {
-    icon: 'text-[#4ade80]',
-    stat: 'glow-stat-green',
-    badge: 'border-[#4ade80]/30',
-    line: 'via-[#4ade80]/30',
-    hover: 'group-hover:text-[#4ade80]',
-  },
-};
+const gameUrl = import.meta.env.PUBLIC_GAME_URL || 'https://rift.metamachina.io';
 ---
 
-<section id="features" class="section-padding bg-mm-bg relative">
-  <div class="section-container">
+<section id="features" class="section-padding section-charcoal section-divide-top relative overflow-hidden">
+  <div class="section-bg-img section-bg-drift" style="background-image: url('/art/bg/MMGrid3.webp'); opacity: 0.05;"></div>
+  <div class="section-container relative z-[2]">
     <!-- Section Header -->
-    <div class="text-center mb-20 reveal">
-      <p class="font-rajdhani text-mm-cyan uppercase tracking-[0.3em] text-sm mb-3">Why Play</p>
-      <h2 class="text-3xl sm:text-4xl md:text-5xl font-orbitron neon-text mb-4">Game Features</h2>
-      <div class="section-divider mt-6"></div>
+    <div class="text-center mb-16 reveal">
+      <p class="font-mono text-mm-gold-primary uppercase tracking-[0.3em] text-xs mb-3">// SYSTEM BRIEFING</p>
+      <h2 class="text-3xl sm:text-4xl md:text-5xl font-orbitron text-mm-gold-primary neon-text mb-4 glitch-text" data-text="Game Features">Game Features</h2>
+      <div class="scan-divider max-w-lg mx-auto mt-6"></div>
     </div>
 
-    <!-- Feature Grid -->
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-      {features.map((feature, i) => {
-        const c = colorMap[feature.color];
-        return (
-          <div class="reveal group relative bg-mm-card/50 border border-mm-elevated/50 p-8 card-hover" style={`transition-delay: ${i * 100}ms`}>
-            <!-- Icon -->
-            <div class={`${c.icon} mb-4`} style={feature.color === 'purple' ? 'filter: drop-shadow(0 0 8px rgba(168,85,247,0.6))' : feature.color === 'green' ? 'filter: drop-shadow(0 0 8px rgba(74,222,128,0.6))' : ''} set:html={feature.svg} />
+    <!-- Hero Feature — Strategic 5x5 Board -->
+    <div class="reveal-scale mb-16">
+      <div class="flex flex-col items-center text-center">
+        <span class="font-mono text-mm-gold-primary text-xs uppercase tracking-wider data-flicker mb-2">25 TILES &middot; 2 PLAYERS &middot; 1 WINNER</span>
+        <h3 class="font-orbitron text-2xl md:text-3xl font-bold text-mm-text mb-4 tracking-wide">Strategic 5&times;5 Board</h3>
+        <p class="font-exo text-mm-text2 text-base leading-relaxed max-w-2xl mb-8">
+          Place cards on a 5&times;5 grid to seize territory and control rows. Card abilities can flip, destroy, or shield tiles — and your hero's Shinpodo moves can reshape the entire battlefield. Every turn matters.
+        </p>
 
-            <!-- Stat Badge -->
-            <span class={`absolute top-6 right-6 ${c.stat} text-xs uppercase tracking-wider border ${c.badge} px-3 py-1`}>
-              {feature.stat}
-            </span>
-
-            <!-- Text -->
-            <h3 class={`font-orbitron text-lg font-bold text-mm-text mb-3 tracking-wide ${c.hover} transition-colors`}>
-              {feature.title}
-            </h3>
-            <p class="font-exo text-mm-text2 text-sm leading-relaxed">
-              {feature.description}
-            </p>
-
-            <!-- Bottom glow line -->
-            <div class={`absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent ${c.line} to-transparent opacity-0 group-hover:opacity-100 transition-opacity`}></div>
+        <!-- Board with P1 / P2 -->
+        <div class="flex items-center gap-4 md:gap-6">
+          <!-- P1 Label (green) -->
+          <div class="flex flex-col items-center gap-2">
+            <div class="w-10 h-10 md:w-12 md:h-12 border-2 border-mm-neon flex items-center justify-center">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#39ff14" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            </div>
+            <span class="font-mono text-mm-neon text-xs font-bold tracking-wider">P1</span>
           </div>
-        );
-      })}
+
+          <!-- 5x5 Grid -->
+          <div id="battle-grid" class="grid grid-cols-5 gap-1 w-48 h-48 md:w-60 md:h-60">
+            {Array.from({ length: 25 }).map((_, i) => (
+              <div class="grid-cell bg-white/5 border border-white/10 transition-all duration-300" data-cell={i}></div>
+            ))}
+          </div>
+
+          <!-- P2 Label (red) -->
+          <div class="flex flex-col items-center gap-2">
+            <div class="w-10 h-10 md:w-12 md:h-12 border-2 border-mm-red flex items-center justify-center">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ff1744" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            </div>
+            <span class="font-mono text-mm-red text-xs font-bold tracking-wider">P2</span>
+          </div>
+        </div>
+
+      </div>
+      <div class="scan-divider mt-10"></div>
+    </div>
+
+    <!-- 3-Column Row — no boxes, just content -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mb-16">
+      <!-- 4,276 Unique Cards -->
+      <div class="reveal-left stagger-1 text-center md:text-left">
+        <span class="font-orbitron text-5xl font-black text-[#a855f7] countup" data-target="4276" style="text-shadow: 0 0 20px rgba(168,85,247,0.4);">0</span>
+        <span class="font-orbitron text-2xl font-black text-[#a855f7]/60">+</span>
+        <h3 class="font-orbitron text-lg font-bold text-mm-text mt-2 mb-3 tracking-wide">Unique Cards</h3>
+        <p class="font-exo text-mm-text2 text-sm leading-relaxed">16 clans, 21 ability types, 5 rarities. From common frontline units to god-tier reality benders.</p>
+      </div>
+
+      <!-- Shinpodo Classes -->
+      <div class="reveal-scale stagger-2 text-center md:text-left">
+        <div class="flex items-baseline gap-3 justify-center md:justify-start">
+          <span class="font-orbitron text-5xl font-black text-mm-gold countup" data-target="4" style="text-shadow: 0 0 20px rgba(251,191,36,0.4);">0</span>
+          <span class="font-mono text-mm-gold/60 text-xs uppercase tracking-wider">Classes</span>
+        </div>
+        <h3 class="font-orbitron text-lg font-bold text-mm-text mt-2 mb-3 tracking-wide">Shinpodo Classes</h3>
+        <p class="font-exo text-mm-text2 text-sm leading-relaxed">Kazen (wind), Iwakami (stone), Seika (flame), Mizu (water). Each unlocks hero abilities and passive bonuses.</p>
+      </div>
+
+      <!-- Ranked Multiplayer -->
+      <div class="reveal-right stagger-3 text-center md:text-left">
+        <span class="font-mono text-mm-gold-primary text-xs uppercase tracking-wider data-flicker">ELO RANKED</span>
+        <h3 class="font-orbitron text-lg font-bold text-mm-text mt-3 mb-3 tracking-wide">Ranked Multiplayer</h3>
+        <p class="font-exo text-mm-text2 text-sm leading-relaxed">Real-time WebSocket matches with ELO ranking. Climb the leaderboard, join clans, challenge friends.</p>
+      </div>
+    </div>
+
+    <div class="scan-divider mb-16"></div>
+
+    <!-- 2-Column Row — no boxes -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+      <!-- 6-Tier AI -->
+      <div class="reveal-left stagger-4">
+        <div class="flex items-center gap-4 mb-3">
+          <span class="font-orbitron text-5xl font-black text-mm-neon countup" data-target="6" style="text-shadow: 0 0 20px rgba(57,255,20,0.4);">0</span>
+          <div>
+            <h3 class="font-orbitron text-lg font-bold text-mm-text tracking-wide">AI Difficulty Tiers</h3>
+            <p class="font-mono text-mm-neon/60 text-xs uppercase tracking-wider">Recruit &rarr; Nightmare</p>
+          </div>
+        </div>
+        <p class="font-exo text-mm-text2 text-sm leading-relaxed mb-4">Practice against AI from beginner to full minimax with beam pruning. Master your strategy before entering ranked.</p>
+        <!-- Animated tier bars -->
+        <div class="flex gap-1">
+          {['Recruit', 'Soldier', 'Veteran', 'Elite', 'Master', 'Nightmare'].map((tier, i) => (
+            <div class="flex-1 flex flex-col items-center gap-1">
+              <div class="w-full tier-bar" style={`height: ${8 + i * 6}px; background: rgba(57,255,20,${0.2 + i * 0.15});`}></div>
+              <span class="font-mono text-[0.5rem] text-mm-muted hidden md:block">{tier.slice(0,3)}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- No Pay-to-Win -->
+      <div class="reveal-right stagger-5">
+        <div class="flex items-center gap-4 mb-3">
+          <div class="w-12 h-12 flex items-center justify-center border border-mm-neon/30 text-mm-neon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
+          </div>
+          <div>
+            <h3 class="font-orbitron text-lg font-bold text-mm-text tracking-wide">No Pay-to-Win</h3>
+            <span class="font-mono text-mm-neon text-xs uppercase tracking-wider data-flicker">100% FREE TO COMPETE</span>
+          </div>
+        </div>
+        <p class="font-exo text-mm-text2 text-sm leading-relaxed">Every single card is earnable through gameplay. Your skill is your only advantage. Free-to-play means free-to-compete.</p>
+      </div>
     </div>
   </div>
 </section>
+
+<script>
+  // Count-up animation for stat numbers
+  const countObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        const el = entry.target as HTMLElement;
+        const target = parseInt(el.dataset.target || '0', 10);
+        const duration = target > 100 ? 2000 : 800;
+        const start = performance.now();
+
+        function step(now: number) {
+          const elapsed = now - start;
+          const progress = Math.min(elapsed / duration, 1);
+          const eased = 1 - (1 - progress) * (1 - progress);
+          el.textContent = Math.floor(eased * target).toLocaleString();
+          if (progress < 1) requestAnimationFrame(step);
+        }
+
+        requestAnimationFrame(step);
+        countObserver.unobserve(el);
+      }
+    });
+  }, { threshold: 0.5 });
+
+  document.querySelectorAll('.countup').forEach((el) => countObserver.observe(el));
+
+  // Mock match simulation on the 5x5 grid
+  const grid = document.getElementById('battle-grid');
+  if (grid) {
+    const cells = grid.querySelectorAll('.grid-cell') as NodeListOf<HTMLElement>;
+
+    const moves: [number, 1 | 2][] = [
+      [5, 1],  [14, 2],
+      [10, 2], [9, 2],
+      [0, 1],  [13, 2],
+      [20, 1], [18, 2],
+      [6, 1],  [12, 2],
+      [1, 1],  [15, 2],
+      [24, 1], [8, 2],
+      [21, 1], [16, 2],
+      [3, 1],  [17, 2],
+      [11, 1], [19, 2],
+      [22, 1], [7, 2],
+      [4, 1],  [23, 2],
+      [2, 1],
+    ];
+
+    let moveIndex = 0;
+    let running = false;
+
+    function resetGrid() {
+      cells.forEach((cell) => {
+        cell.className = 'grid-cell bg-white/5 border border-white/10 transition-all duration-300';
+        cell.style.boxShadow = '';
+      });
+      moveIndex = 0;
+    }
+
+    function playMove() {
+      if (moveIndex >= moves.length) {
+        setTimeout(() => {
+          resetGrid();
+          setTimeout(playMove, 800);
+        }, 3000);
+        return;
+      }
+
+      const [cellIdx, player] = moves[moveIndex];
+      const cell = cells[cellIdx];
+
+      if (player === 1) {
+        cell.className = 'grid-cell border transition-all duration-300 bg-mm-neon/30 border-mm-neon/60';
+        cell.style.boxShadow = '0 0 8px rgba(57,255,20,0.3)';
+      } else {
+        cell.className = 'grid-cell border transition-all duration-300 bg-mm-red/40 border-mm-red/70';
+        cell.style.boxShadow = '0 0 8px rgba(255,23,68,0.4)';
+      }
+
+      moveIndex++;
+      setTimeout(playMove, 600);
+    }
+
+    const gridObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting && !running) {
+          running = true;
+          setTimeout(playMove, 500);
+        }
+      });
+    }, { threshold: 0.3 });
+
+    gridObserver.observe(grid);
+  }
+</script>
+
+<style>
+  .tier-bar {
+    transition: height 0.6s ease;
+  }
+  .grid-cell {
+    aspect-ratio: 1;
+  }
+</style>

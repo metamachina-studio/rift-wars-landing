@@ -20,6 +20,9 @@ const upcomingFeatures = [
     description: 'Companion creatures that accompany you into battle. Collect, level up, and show off your favorites.',
     status: 'Planned',
   },
+];
+
+const bottomRow = [
   {
     svg: '<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14.5 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/><path d="M12 18v-6"/><path d="M9 15l3 3 3-3"/></svg>',
     title: 'Side Quest Missions',
@@ -31,76 +34,70 @@ const upcomingFeatures = [
     title: 'Zodiac Campaign',
     description: 'A full single-player campaign — battle the 12 Zodiac Bosses to earn personalized Boss Cards for your live decks.',
     status: 'In Development',
-    featured: true,
   },
 ];
 ---
 
-<section id="coming-soon" class="section-padding bg-mm-bg relative overflow-hidden">
+<section id="coming-soon" class="section-padding section-charcoal section-divide-top relative overflow-hidden">
+  <div class="section-bg-img section-bg-drift" style="background-image: url('/art/bg/MMGrid9.webp'); opacity: 0.05;"></div>
   <!-- Ambient glow -->
-  <div class="absolute top-0 left-1/4 w-96 h-96 bg-mm-gold/5 rounded-full blur-[120px] pointer-events-none"></div>
-  <div class="absolute bottom-0 right-1/4 w-80 h-80 bg-mm-cyan/5 rounded-full blur-[100px] pointer-events-none"></div>
+  <div class="absolute top-0 left-1/4 w-96 h-96 bg-mm-gold-primary/5 rounded-full blur-[120px] pointer-events-none z-[1]"></div>
+  <div class="absolute bottom-0 right-1/4 w-80 h-80 bg-mm-gold-primary/5 rounded-full blur-[100px] pointer-events-none z-[1]"></div>
 
-  <div class="section-container">
+  <div class="section-container relative z-[2]">
     <!-- Section Header -->
     <div class="text-center mb-8 reveal">
-      <p class="font-rajdhani text-mm-gold uppercase tracking-[0.3em] text-sm mb-3">On the Horizon</p>
-      <h2 class="text-3xl sm:text-4xl md:text-5xl font-orbitron neon-text mb-4">Coming Soon</h2>
+      <p class="font-mono text-mm-gold-primary uppercase tracking-[0.3em] text-xs mb-3">// INCOMING</p>
+      <h2 class="text-3xl sm:text-4xl md:text-5xl font-orbitron text-mm-gold-primary neon-text mb-4 glitch-text" data-text="Coming Soon">Coming Soon</h2>
       <p class="font-exo text-mm-text max-w-xl mx-auto">
         Rift Wars is just getting started. Here's what's being built next.
       </p>
-      <div class="section-divider mt-6"></div>
+      <div class="scan-divider max-w-lg mx-auto mt-6"></div>
     </div>
 
     <!-- Ownership Promise -->
-    <div class="reveal max-w-3xl mx-auto mb-12 bg-mm-card/60 border border-mm-cyan/20 p-6 sm:p-8 text-center neon-box">
+    <div class="reveal max-w-3xl mx-auto mb-12 bg-mm-card/60 border border-mm-gold-primary/20 p-6 sm:p-8 text-center neon-box">
       <div class="flex items-center justify-center gap-3 mb-3">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="text-mm-cyan">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="text-mm-gold-primary">
           <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/>
         </svg>
-        <h3 class="font-orbitron text-lg text-mm-cyan neon-text-strong tracking-wide">Your Cards. Forever.</h3>
+        <h3 class="font-orbitron text-lg text-mm-gold-primary neon-text-strong tracking-wide">Your Cards. Forever.</h3>
       </div>
       <p class="font-exo text-mm-text text-sm leading-relaxed">
         No new assets will ever need to be purchased to participate or play any expansion.
-        Your current owned cards work as <span class="font-bold text-mm-cyan">characters, units, and powers</span> in all
+        Your current owned cards work as <span class="font-bold text-mm-gold-primary">characters, units, and powers</span> in all
         coming game modes — forever. Buy once, play everything.
       </p>
     </div>
 
-    <!-- Features Grid -->
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
+    <!-- Top Row: 3 cards -->
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-5xl mx-auto mb-6">
       {upcomingFeatures.map((feature) => (
-        <div class={`coming-soon-card reveal ${feature.featured ? 'coming-soon-featured lg:col-span-3 sm:col-span-2' : ''}`}>
-          <div class="coming-soon-icon text-mm-cyan neon-text" set:html={feature.svg} />
+        <div class="coming-soon-card reveal" style="border-top: 2px solid #F2AD23">
+          <div class="coming-soon-icon text-mm-gold-primary" style="text-shadow: 0 0 12px rgba(242,173,35,0.4)" set:html={feature.svg} />
           <div class="coming-soon-status">
             <span class={`status-badge ${feature.status === 'In Development' ? 'status-active' : 'status-planned'}`}>
               {feature.status}
             </span>
           </div>
-          <h3 class="font-orbitron text-lg sm:text-xl text-mm-text mb-2">{feature.title}</h3>
+          <h3 class="font-orbitron text-lg text-mm-text mb-2">{feature.title}</h3>
           <p class="font-exo text-mm-text2 text-sm leading-relaxed">{feature.description}</p>
+        </div>
+      ))}
+    </div>
 
-          {feature.featured && (
-            <div class="zodiac-highlight">
-              <div class="zodiac-grid">
-                <span class="zodiac-symbol">♈</span>
-                <span class="zodiac-symbol">♉</span>
-                <span class="zodiac-symbol">♊</span>
-                <span class="zodiac-symbol">♋</span>
-                <span class="zodiac-symbol">♌</span>
-                <span class="zodiac-symbol">♍</span>
-                <span class="zodiac-symbol">♎</span>
-                <span class="zodiac-symbol">♏</span>
-                <span class="zodiac-symbol">♐</span>
-                <span class="zodiac-symbol">♑</span>
-                <span class="zodiac-symbol">♒</span>
-                <span class="zodiac-symbol">♓</span>
-              </div>
-              <p class="font-rajdhani text-mm-gold/80 text-xs uppercase tracking-wider mt-3">
-                12 Bosses — 12 Unique Boss Cards
-              </p>
-            </div>
-          )}
+    <!-- Bottom Row: Side Quests + Zodiac side by side -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-5xl mx-auto">
+      {bottomRow.map((feature) => (
+        <div class="coming-soon-card reveal" style="border-top: 2px solid #F2AD23">
+          <div class="coming-soon-icon text-mm-gold-primary" style="text-shadow: 0 0 12px rgba(242,173,35,0.4)" set:html={feature.svg} />
+          <div class="coming-soon-status">
+            <span class={`status-badge ${feature.status === 'In Development' ? 'status-active' : 'status-planned'}`}>
+              {feature.status}
+            </span>
+          </div>
+          <h3 class="font-orbitron text-lg text-mm-text mb-2">{feature.title}</h3>
+          <p class="font-exo text-mm-text2 text-sm leading-relaxed">{feature.description}</p>
         </div>
       ))}
     </div>

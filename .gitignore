@@ -22,3 +22,7 @@ dist
 # OS
 Thumbs.db
 .thumb-cache
+
+# Dev utilities
+screenshot.png
+take-screenshot.ps1

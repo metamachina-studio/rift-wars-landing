@@ -1,0 +1,88 @@
+---
+const gameUrl = import.meta.env.PUBLIC_GAME_URL || 'https://rift.metamachina.io';
+---
+
+<section id="economy" class="section-padding section-charcoal section-divide-top relative">
+  <div class="section-container">
+    <!-- Section Header -->
+    <div class="text-center mb-16 reveal">
+      <p class="font-mono text-mm-gold uppercase tracking-[0.3em] text-xs mb-3">// ECONOMY PROTOCOL</p>
+      <h2 class="text-3xl sm:text-4xl md:text-5xl font-orbitron text-mm-gold-primary neon-text mb-4 glitch-text" data-text="M-Credz Economy">M-Credz Economy</h2>
+      <div class="scan-divider max-w-lg mx-auto mt-6"></div>
+    </div>
+
+    <!-- M-Credz Content -->
+    <div class="reveal max-w-5xl mx-auto">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+        <!-- Vending Machine -->
+        <div class="reveal-left flex items-center justify-center">
+          <img
+            src="/art/vendor-machine.webp"
+            alt="M-Credz Vendor Machine"
+            class="w-full max-w-sm mx-auto"
+            style="filter: drop-shadow(0 0 40px rgba(251,191,36,0.25));"
+          />
+        </div>
+
+        <!-- Info -->
+        <div class="reveal-right">
+          <span class="font-mono text-mm-gold text-xs uppercase tracking-wider data-flicker">DIGITAL CURRENCY</span>
+          <h3 class="font-orbitron text-2xl md:text-3xl font-bold text-mm-gold mt-2 mb-4 tracking-wide" style="text-shadow: 0 0 12px rgba(251,191,36,0.4);">M-Credz</h3>
+          <p class="font-exo text-mm-text2 text-base leading-relaxed mb-6">
+            Digital currency backed by Meta Crystal energy. <span class="glow-stat-gold">1 M-Cred = $0.01 USD.</span>
+            Earn through gameplay or buy with USDT/USDC. Free players earn up to 30/day — Battle Pass removes the cap.
+          </p>
+
+          <div class="grid grid-cols-2 gap-4 mb-6">
+            <div class="text-center">
+              <span class="glow-stat-gold text-3xl font-orbitron font-black countup" data-target="7">0</span>
+              <p class="font-mono text-mm-muted text-[0.65rem] uppercase mt-1">Per Win</p>
+            </div>
+            <div class="text-center">
+              <span class="glow-stat-gold text-3xl font-orbitron font-black countup" data-target="2">0</span>
+              <p class="font-mono text-mm-muted text-[0.65rem] uppercase mt-1">Per Loss</p>
+            </div>
+            <div class="text-center">
+              <span class="glow-stat-gold text-3xl font-orbitron font-black countup" data-target="30">0</span>
+              <p class="font-mono text-mm-muted text-[0.65rem] uppercase mt-1">Daily Cap (Free)</p>
+            </div>
+            <div class="text-center">
+              <span class="glow-stat-gold text-3xl font-orbitron font-black">&infin;</span>
+              <p class="font-mono text-mm-muted text-[0.65rem] uppercase mt-1">W/ Battle Pass</p>
+            </div>
+          </div>
+
+          <p class="font-mono text-mm-gold-primary/80 text-[0.6rem] uppercase tracking-wider border border-mm-gold-primary/20 bg-mm-gold-primary/5 px-2 py-1.5 inline-block">
+            Beta only. On-chain launch TBD.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        const el = entry.target as HTMLElement;
+        const target = parseInt(el.dataset.target || '0', 10);
+        const duration = target > 100 ? 2000 : 800;
+        const start = performance.now();
+
+        function step(now: number) {
+          const elapsed = now - start;
+          const progress = Math.min(elapsed / duration, 1);
+          const eased = 1 - (1 - progress) * (1 - progress);
+          el.textContent = Math.floor(eased * target).toLocaleString();
+          if (progress < 1) requestAnimationFrame(step);
+        }
+
+        requestAnimationFrame(step);
+        observer.unobserve(el);
+      }
+    });
+  }, { threshold: 0.5 });
+
+  document.querySelectorAll('#economy .countup').forEach((el) => observer.observe(el));
+</script>

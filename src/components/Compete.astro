@@ -1,0 +1,71 @@
+---
+import Leaderboard from './Leaderboard.tsx';
+const gameUrl = import.meta.env.PUBLIC_GAME_URL || 'https://rift.metamachina.io';
+---
+
+<section id="compete" class="section-padding bg-mm-bg relative">
+  <div class="section-container">
+    <!-- Section Header -->
+    <div class="text-center mb-12 reveal">
+      <p class="font-mono text-mm-gold-primary uppercase tracking-[0.3em] text-xs mb-3">// COMBAT PROTOCOL</p>
+      <h2 class="text-3xl sm:text-4xl md:text-5xl font-orbitron text-mm-gold-primary neon-text mb-4 glitch-text" data-text="Compete">Compete</h2>
+      <div class="scan-divider max-w-lg mx-auto mt-6"></div>
+    </div>
+
+    <!-- Side-by-Side: Tournaments | Leaderboard -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+
+      <!-- Tournaments Panel -->
+      <div class="reveal-left bg-mm-card/50 border border-mm-gold-primary/30 p-6 relative overflow-hidden">
+        <div class="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-mm-gold-primary/50 via-transparent to-transparent"></div>
+
+        <h3 class="font-orbitron text-xl font-bold text-mm-text mb-4 tracking-wide">Tournaments</h3>
+
+        <div class="text-center py-6 mb-6">
+          <div class="text-4xl mb-4 text-mm-gold-primary data-flicker">&#9876;</div>
+          <h4 class="font-orbitron text-lg text-mm-gold-primary neon-text mb-3">Coming Soon</h4>
+          <p class="font-exo text-mm-text2 text-sm leading-relaxed mb-6">
+            Weekly brackets, seasonal championships, and exclusive rewards for top Rifters.
+          </p>
+        </div>
+
+        <!-- Tournament Preview Cards -->
+        <div class="space-y-3 mb-6">
+          <div class="bg-mm-bg/50 border border-mm-elevated/30 p-3 flex justify-between items-center">
+            <div>
+              <p class="font-mono text-mm-gold-primary text-[0.6rem] uppercase tracking-wider">Weekly</p>
+              <p class="font-orbitron text-sm text-mm-text">Rift Clash</p>
+            </div>
+            <span class="font-mono text-mm-muted text-[0.6rem]">32 players</span>
+          </div>
+          <div class="bg-mm-bg/50 border border-mm-elevated/30 p-3 flex justify-between items-center">
+            <div>
+              <p class="font-mono text-mm-gold text-[0.6rem] uppercase tracking-wider">Monthly</p>
+              <p class="font-orbitron text-sm text-mm-text">Pangaea Cup</p>
+            </div>
+            <span class="font-mono text-mm-muted text-[0.6rem]">Top 64</span>
+          </div>
+          <div class="bg-mm-bg/50 border border-mm-elevated/30 p-3 flex justify-between items-center">
+            <div>
+              <p class="font-mono text-mm-gold-primary text-[0.6rem] uppercase tracking-wider">Seasonal</p>
+              <p class="font-orbitron text-sm text-mm-text">World Rift</p>
+            </div>
+            <span class="font-mono text-mm-muted text-[0.6rem]">Grand championship</span>
+          </div>
+        </div>
+
+        <a href={gameUrl} target="_blank" rel="noopener" class="btn-primary text-xs w-full text-center">
+          Start Climbing the Ranks
+        </a>
+      </div>
+
+      <!-- Leaderboard Panel -->
+      <div class="reveal-right bg-mm-card/50 border border-mm-elevated/30 p-6 relative overflow-hidden">
+        <div class="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-mm-gold-primary/30 to-mm-gold-primary/50"></div>
+
+        <h3 class="font-orbitron text-xl font-bold text-mm-text mb-4 tracking-wide">Leaderboard</h3>
+        <Leaderboard client:visible />
+      </div>
+    </div>
+  </div>
+</section>

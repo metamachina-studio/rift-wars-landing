@@ -12,31 +12,31 @@ interface Player {
 }
 
 const SCHOOL_COLORS: Record<string, string> = {
-  kazen: '#00e5ff',
+  kazen: '#F2AD23',
   iwakami: '#a0a0a0',
   seika: '#ff6b35',
   mizu: '#4dabf7',
 };
 
-export default function FeaturedPlayers() {
+export default function FeaturedPlayers({ limit = 8 }: { limit?: number }) {
   const [players, setPlayers] = useState<Player[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch(`${API_URL}/leaderboard?limit=8`)
+    fetch(`${API_URL}/leaderboard?limit=${limit}`)
       .then(r => r.json())
       .then(data => {
         const list = Array.isArray(data) ? data : data.leaderboard || [];
-        setPlayers(list.slice(0, 8));
+        setPlayers(list.slice(0, limit));
         setLoading(false);
       })
       .catch(() => setLoading(false));
-  }, []);
+  }, [limit]);
 
   if (loading) {
     return (
       <div className="text-center py-16">
-        <div className="inline-block w-8 h-8 border-2 border-mm-cyan/30 border-t-mm-cyan rounded-full animate-spin" />
+        <div className="inline-block w-8 h-8 border-2 border-mm-gold-primary/30 border-t-mm-gold-primary rounded-full animate-spin" />
       </div>
     );
   }
@@ -53,11 +53,11 @@ export default function FeaturedPlayers() {
           className="bg-mm-card/50 border border-mm-elevated/50 p-4 text-center card-hover"
         >
           {/* Rank Badge */}
-          <div className="font-orbitron text-xs text-mm-cyan mb-2">#{i + 1}</div>
+          <div className="font-orbitron text-xs text-mm-gold-primary mb-2">#{i + 1}</div>
 
           {/* Avatar placeholder */}
-          <div className="w-16 h-16 mx-auto mb-3 rounded-full bg-mm-elevated/50 border border-mm-cyan/20 flex items-center justify-center">
-            <span className="font-orbitron text-xl text-mm-cyan">
+          <div className="w-16 h-16 mx-auto mb-3 rounded-full bg-mm-elevated/50 border border-mm-gold-primary/20 flex items-center justify-center">
+            <span className="font-orbitron text-xl text-mm-gold-primary">
               {p.display_name.charAt(0).toUpperCase()}
             </span>
           </div>
@@ -70,7 +70,7 @@ export default function FeaturedPlayers() {
           {/* Stats */}
           <div className="flex justify-center gap-3 mt-2">
             <div className="text-center">
-              <p className="font-orbitron text-sm text-mm-cyan">{p.elo}</p>
+              <p className="font-orbitron text-sm text-mm-gold-primary">{p.elo}</p>
               <p className="font-rajdhani text-[10px] text-mm-muted uppercase">ELO</p>
             </div>
             <div className="text-center">
@@ -80,7 +80,7 @@ export default function FeaturedPlayers() {
           </div>
 
           <div className="mt-2">
-            <span className="font-exo text-xs text-mm-green">{p.wins}W</span>
+            <span className="font-exo text-xs text-mm-neon">{p.wins}W</span>
             <span className="text-mm-muted text-xs mx-1">/</span>
             <span className="font-exo text-xs text-mm-red">{p.losses}L</span>
           </div>

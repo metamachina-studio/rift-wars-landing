@@ -25,7 +25,7 @@ const tiers = [
     artifactReward: 'None',
     foundersBadge: false,
     highlight: false,
-    colorClass: 'text-mm-cyan',
+    colorClass: 'text-mm-gold-primary',
     priceClass: 'glow-stat',
   },
   {
@@ -60,16 +60,17 @@ const tiers = [
 ];
 ---
 
-<section id="battlepass" class="section-padding bg-mm-bg2 relative">
-  <div class="section-container">
+<section id="battlepass" class="section-padding section-charcoal section-divide-top relative overflow-hidden">
+  <div class="section-bg-img section-bg-drift" style="background-image: url('/art/bg/MMGrid2.webp'); opacity: 0.05;"></div>
+  <div class="section-container relative z-[2]">
     <!-- Section Header -->
     <div class="text-center mb-16 reveal">
-      <p class="font-rajdhani text-mm-cyan uppercase tracking-[0.3em] text-sm mb-3">Power Up</p>
-      <h2 class="text-3xl sm:text-4xl md:text-5xl font-orbitron neon-text mb-4">Battle Pass</h2>
+      <p class="font-mono text-[#a855f7] uppercase tracking-[0.3em] text-xs mb-3">// POWER UP</p>
+      <h2 class="text-3xl sm:text-4xl md:text-5xl font-orbitron text-mm-gold-primary neon-text mb-4 glitch-text" data-text="Battle Pass">Battle Pass</h2>
       <p class="font-exo text-mm-text max-w-lg mx-auto">
         Optional boosts for dedicated Rifters. The game is fully playable for free — Battle Pass just accelerates your collection.
       </p>
-      <div class="section-divider mt-6"></div>
+      <div class="scan-divider max-w-lg mx-auto mt-6"></div>
     </div>
 
     <!-- Tier Cards -->
@@ -86,7 +87,7 @@ const tiers = [
           style={`transition-delay: ${i * 100}ms`}
         >
           {tier.highlight && (
-            <div class={`absolute -top-3 left-1/2 -translate-x-1/2 ${tier.badgeBg || 'bg-mm-cyan'} text-mm-bg font-rajdhani text-xs font-bold uppercase tracking-widest px-4 py-1`}>
+            <div class={`absolute -top-3 left-1/2 -translate-x-1/2 ${tier.badgeBg || 'bg-mm-gold-primary'} text-mm-bg font-rajdhani text-xs font-bold uppercase tracking-widest px-4 py-1`}>
               Popular
             </div>
           )}
@@ -105,15 +106,15 @@ const tiers = [
 
           <ul class="space-y-3 flex-1 mb-6">
             <li class="flex items-start gap-2 text-sm">
-              <span class="text-mm-cyan mt-0.5">&#10003;</span>
+              <span class="text-mm-gold-primary mt-0.5">&#10003;</span>
               <span class="font-exo text-mm-text">{tier.packs > 0 ? `${tier.packs} Card Packs` : 'Starter Deck'}</span>
             </li>
             <li class="flex items-start gap-2 text-sm">
-              <span class="text-mm-cyan mt-0.5">&#10003;</span>
+              <span class="text-mm-gold-primary mt-0.5">&#10003;</span>
               <span class="font-exo text-mm-text">{tier.boost} M-Credz Boost</span>
             </li>
             <li class="flex items-start gap-2 text-sm">
-              <span class="text-mm-cyan mt-0.5">&#10003;</span>
+              <span class="text-mm-gold-primary mt-0.5">&#10003;</span>
               <span class="font-exo text-mm-text">{tier.dailyCap}</span>
             </li>
             {tier.sceneReward !== 'None' && (

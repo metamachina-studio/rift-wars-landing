@@ -2,16 +2,16 @@
 const gameUrl = import.meta.env.PUBLIC_GAME_URL || 'https://rift.metamachina.io';
 ---
 
-<section id="shop" class="section-padding bg-mm-bg relative">
+<section id="shop" class="section-padding bg-mm-bg section-divide-top relative">
   <div class="section-container">
     <!-- Section Header -->
     <div class="text-center mb-16 reveal">
-      <p class="font-rajdhani text-mm-cyan uppercase tracking-[0.3em] text-sm mb-3">Acquire</p>
-      <h2 class="text-3xl sm:text-4xl md:text-5xl font-orbitron neon-text mb-4">Card Packs</h2>
+      <p class="font-mono text-mm-gold-primary uppercase tracking-[0.3em] text-xs mb-3">// ACQUIRE</p>
+      <h2 class="text-3xl sm:text-4xl md:text-5xl font-orbitron text-mm-gold-primary neon-text mb-4 glitch-text" data-text="Genesis Card Packs">Genesis Card Packs</h2>
       <p class="font-exo text-mm-text max-w-lg mx-auto">
         Everything purchasable with M-Credz earned through gameplay. No real money required.
       </p>
-      <div class="section-divider mt-6"></div>
+      <div class="scan-divider max-w-lg mx-auto mt-6"></div>
     </div>
 
     <!-- Card Pack Section -->
@@ -30,19 +30,19 @@ const gameUrl = import.meta.env.PUBLIC_GAME_URL || 'https://rift.metamachina.io'
         <div class="space-y-6">
           <div class="bg-mm-card/60 border border-mm-elevated/50 p-8 card-hover">
             <div class="flex items-center gap-3 mb-4">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="text-mm-cyan">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="text-mm-gold-primary">
                 <rect x="2" y="4" width="14" height="18" rx="1"/><path d="M6 2h12a2 2 0 012 2v14"/><path d="M8 10h4m-4 4h6"/>
               </svg>
               <h3 class="font-orbitron text-xl font-bold text-mm-text tracking-wide">Card Pack</h3>
             </div>
             <p class="font-exo text-mm-text2 text-sm leading-relaxed mb-4">
-              <span class="glow-stat text-lg">7 cards</span> per Genesis Pack. Collect across all
-              <span class="glow-stat text-lg">16 clans</span> and <span class="glow-stat text-lg">5 rarities</span>.
+              <span class="glow-stat-green text-lg">7 cards</span> per Genesis Pack. Collect across all
+              <span class="glow-stat-green text-lg">16 clans</span> and <span class="glow-stat-green text-lg">5 rarities</span>.
               Only <span class="glow-stat-gold text-lg">2,000,000</span> Genesis Packs will ever be minted.
             </p>
             <div class="flex items-center gap-4 mb-6">
               <span class="glow-stat-gold text-2xl font-orbitron font-black">300 M-Credz</span>
-              <span class="font-rajdhani text-mm-text2 text-xs uppercase tracking-wider">or $3.00 USD per Pack</span>
+              <span class="font-mono text-mm-text2 text-xs uppercase tracking-wider">or $3.00 USD per Pack</span>
             </div>
 
             <div class="space-y-2 mb-6">
@@ -59,11 +59,11 @@ const gameUrl = import.meta.env.PUBLIC_GAME_URL || 'https://rift.metamachina.io'
                 <span class="font-exo text-mm-text2">Slot 7 (Wild): 55% Rare · 40% Epic · 4.5% Legendary · 0.5% God Tier</span>
               </div>
               <div class="flex items-center gap-2 text-sm">
-                <span class="w-2 h-2 bg-mm-cyan rounded-full"></span>
+                <span class="w-2 h-2 bg-mm-gold-primary rounded-full"></span>
                 <span class="font-exo text-mm-text2">Cards from all 16 clans</span>
               </div>
               <div class="flex items-center gap-2 text-sm">
-                <span class="w-2 h-2 bg-mm-green rounded-full"></span>
+                <span class="w-2 h-2 bg-mm-neon rounded-full"></span>
                 <span class="font-exo text-mm-text2">Earn M-Credz through gameplay — or buy with USDT/USDC</span>
               </div>
             </div>

@@ -1,12 +1,16 @@
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import type { StarterCard } from '../lib/starterDeck';
 import {
   STARTER_DECK, getCardArtUrl, getCardGridPositions,
   getAbilityText, getClanInitials, RARITY_CONFIG, CLAN_THEME,
 } from '../lib/starterDeck';
 
-const ALL_CLANS = [...new Set(STARTER_DECK.map(c => c.clan))];
 const GAME_URL = import.meta.env.PUBLIC_GAME_URL || 'https://rift.metamachina.io';
+
+// Split cards into 2 rows
+const half = Math.ceil(STARTER_DECK.length / 2);
+const ROW_1 = STARTER_DECK.slice(0, half);
+const ROW_2 = STARTER_DECK.slice(half);
 
 // ---- Mini card grid (5x5) ----
 function CardGrid({ positions, size = 12 }: { positions: number[]; size?: number }) {
@@ -68,25 +72,15 @@ function MMCardFace({ card, onClick }: { card: StarterCard; onClick: () => void 
   const categoryBadge = card.category === 'support' ? 'SUP' : card.category === 'longRange' ? 'LR' : card.category === 'specialist' ? 'SPE' : '';
 
   return (
-    <div className="mm-card" onClick={onClick} title={`${card.name} — Click to inspect`}>
+    <div className="mm-card showcase-card" onClick={onClick} title={`${card.name} — Click to inspect`}>
       <div className={`mm-card-face ${rarityConf.cssClass}`}>
-        {/* Card art */}
         <div className="mm-card-art" style={{ backgroundImage: `url(${artPath})` }} />
-        {/* Card border */}
         <div className="mm-card-border" />
-
-        {/* Cost badge — top-left */}
         <div className={`mm-cost mm-cost-${card.crystalCost}`}>
           <CostDiamonds cost={card.crystalCost} />
         </div>
-
-        {/* Shinpodo — top-right */}
         <div className="mm-shinpodo">{card.shinpodo}</div>
-
-        {/* Category badge */}
         {categoryBadge && <div className="mm-category">{categoryBadge}</div>}
-
-        {/* Grid overlay */}
         <div className="mm-grid">
           {gridPositions.map((val, idx) => (
             <div key={idx} className={`grid-cell ${
@@ -98,14 +92,10 @@ function MMCardFace({ card, onClick }: { card: StarterCard; onClick: () => void 
             }`} />
           ))}
         </div>
-
-        {/* Bottom bar */}
         <div className="mm-bottom">
           <span className="mm-name">{card.name}</span>
           <span className="mm-faction">{getClanInitials(card.clan)}</span>
         </div>
-
-        {/* Hover info */}
         <div className="mm-hover-info">
           <div className="mm-hover-name">{card.name}</div>
           <div className="mm-hover-clan">{card.clan}</div>
@@ -138,23 +128,15 @@ function CardDetailModal({ card, onClose }: { card: StarterCard; onClose: () => 
   return (
     <div className="card-inspect-overlay" onClick={onClose}>
       <div className="card-detail-modal" onClick={e => e.stopPropagation()}>
-        {/* Close button */}
         <button className="card-detail-close" onClick={onClose}>✕</button>
-
-        {/* Large card art */}
         <div className="card-detail-art" style={{ backgroundImage: `url(${artPath})` }}>
-          {/* Cost */}
           <div className={`mm-cost mm-cost-${card.crystalCost}`} style={{ width: 56, height: 56 }}>
             <CostDiamonds cost={card.crystalCost} />
           </div>
-          {/* Shinpodo */}
           <div className="mm-shinpodo" style={{ width: 56, height: 56, fontSize: '1.4rem' }}>{card.shinpodo}</div>
         </div>
-
-        {/* Card Info */}
         <div className="card-detail-info">
           <h3 className="card-detail-name">{card.name}</h3>
-
           <div className="card-detail-tags">
             <span className="card-detail-rarity" style={{ color: rarityConf.color, borderColor: `${rarityConf.color}66` }}>
               {rarityConf.label}
@@ -168,8 +150,6 @@ function CardDetailModal({ card, onClose }: { card: StarterCard; onClose: () => 
               </span>
             )}
           </div>
-
-          {/* Stats row */}
           <div className="card-detail-stats">
             <div className="card-detail-stat">
               <span className="card-detail-stat-val">{card.shinpodo}</span>
@@ -184,8 +164,6 @@ function CardDetailModal({ card, onClose }: { card: StarterCard; onClose: () => 
               <span className="card-detail-stat-label">Grid Tiles</span>
             </div>
           </div>
-
-          {/* Grid */}
           <div className="card-detail-grid-section">
             <span className="card-detail-grid-label">Grid Pattern</span>
             <CardGrid positions={gridPositions} size={18} />
@@ -196,16 +174,12 @@ function CardDetailModal({ card, onClose }: { card: StarterCard; onClose: () => 
               <span><span className="legend-dot" style={{ background: '#fff', width: 8, height: 8 }} /> Center</span>
             </div>
           </div>
-
-          {/* Ability */}
           {abilityText && (
             <div className="card-detail-ability">
               <span className="card-detail-ability-label">Ability</span>
               <p className="card-detail-ability-text">{abilityText}</p>
             </div>
           )}
-
-          {/* Quote */}
           {card.quote && (
             <p className="card-detail-quote">"{card.quote}"</p>
           )}
@@ -215,45 +189,99 @@ function CardDetailModal({ card, onClose }: { card: StarterCard; onClose: () => 
   );
 }
 
-// ---- Main Showcase Island ----
-export default function CardShowcaseIsland() {
-  const [activeClan, setActiveClan] = useState<string | null>(null);
-  const [inspectedCard, setInspectedCard] = useState<StarterCard | null>(null);
+// ---- Scrollable Row ----
+function ScrollRow({ cards, onInspect, reverse }: { cards: StarterCard[]; onInspect: (c: StarterCard) => void; reverse?: boolean }) {
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const isDragging = useRef(false);
+  const startX = useRef(0);
+  const scrollLeft = useRef(0);
+  const didDrag = useRef(false);
 
-  const filteredCards = activeClan
-    ? STARTER_DECK.filter(c => c.clan === activeClan)
-    : STARTER_DECK;
+  // Mouse drag scrolling
+  const onPointerDown = (e: React.PointerEvent) => {
+    const el = scrollRef.current;
+    if (!el) return;
+    isDragging.current = true;
+    didDrag.current = false;
+    startX.current = e.clientX;
+    scrollLeft.current = el.scrollLeft;
+    el.setPointerCapture(e.pointerId);
+    el.style.cursor = 'grabbing';
+  };
+
+  const onPointerMove = (e: React.PointerEvent) => {
+    if (!isDragging.current || !scrollRef.current) return;
+    const dx = e.clientX - startX.current;
+    if (Math.abs(dx) > 4) didDrag.current = true;
+    scrollRef.current.scrollLeft = scrollLeft.current - dx;
+  };
+
+  const onPointerUp = (e: React.PointerEvent) => {
+    isDragging.current = false;
+    if (scrollRef.current) {
+      scrollRef.current.releasePointerCapture(e.pointerId);
+      scrollRef.current.style.cursor = 'grab';
+    }
+  };
+
+  const handleCardClick = (card: StarterCard) => {
+    if (!didDrag.current) onInspect(card);
+  };
+
+  // Auto-scroll animation
+  useEffect(() => {
+    const el = scrollRef.current;
+    if (!el) return;
+    let raf: number;
+    const speed = reverse ? -0.3 : 0.3;
+
+    const step = () => {
+      if (!isDragging.current) {
+        el.scrollLeft += speed;
+        // loop back
+        if (!reverse && el.scrollLeft >= el.scrollWidth - el.clientWidth) {
+          el.scrollLeft = 0;
+        }
+        if (reverse && el.scrollLeft <= 0) {
+          el.scrollLeft = el.scrollWidth - el.clientWidth;
+        }
+      }
+      raf = requestAnimationFrame(step);
+    };
+    raf = requestAnimationFrame(step);
+    return () => cancelAnimationFrame(raf);
+  }, [reverse]);
 
   return (
-    <div>
-      {/* Clan filter tabs */}
-      <div className="showcase-tabs">
-        <button
-          onClick={() => setActiveClan(null)}
-          className={`showcase-tab ${activeClan === null ? 'active' : ''}`}
-        >
-          All ({STARTER_DECK.length})
-        </button>
-        {ALL_CLANS.map(clan => {
-          const count = STARTER_DECK.filter(c => c.clan === clan).length;
-          return (
-            <button
-              key={clan}
-              onClick={() => setActiveClan(clan)}
-              className={`showcase-tab ${activeClan === clan ? 'active' : ''}`}
-            >
-              {clan} ({count})
-            </button>
-          );
-        })}
-      </div>
+    <div
+      ref={scrollRef}
+      className="showcase-scroll-row"
+      onPointerDown={onPointerDown}
+      onPointerMove={onPointerMove}
+      onPointerUp={onPointerUp}
+      onPointerCancel={onPointerUp}
+      style={{ cursor: 'grab' }}
+    >
+      {/* Render cards twice for seamless looping */}
+      {[...cards, ...cards].map((card, i) => (
+        <div key={`${card.name}-${i}`} className="showcase-scroll-card">
+          <MMCardFace card={card} onClick={() => handleCardClick(card)} />
+        </div>
+      ))}
+    </div>
+  );
+}
 
-      {/* Card grid */}
-      <div className="showcase-grid">
-        {filteredCards.map(card => (
-          <MMCardFace key={card.name} card={card} onClick={() => setInspectedCard(card)} />
-        ))}
-      </div>
+// ---- Main Showcase Island ----
+export default function CardShowcaseIsland() {
+  const [inspectedCard, setInspectedCard] = useState<StarterCard | null>(null);
+
+  return (
+    <div className="showcase-scroller-wrap">
+      {/* Row 1 — scrolls right */}
+      <ScrollRow cards={ROW_1} onInspect={setInspectedCard} />
+      {/* Row 2 — scrolls left */}
+      <ScrollRow cards={ROW_2} onInspect={setInspectedCard} reverse />
 
       {/* CTA */}
       <div style={{ textAlign: 'center', marginTop: 32 }}>

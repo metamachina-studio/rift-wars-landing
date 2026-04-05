@@ -53,7 +53,7 @@ const gameUrl = import.meta.env.PUBLIC_GAME_URL || 'https://rift.metamachina.io'
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;500;600;700&family=Exo+2:ital,wght@0,300;0,400;0,600;0,700;1,400&display=swap"
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;500;600;700&family=Exo+2:ital,wght@0,300;0,400;0,600;0,700;1,400&display=swap"
       rel="stylesheet"
     />
 
@@ -86,7 +86,7 @@ const gameUrl = import.meta.env.PUBLIC_GAME_URL || 'https://rift.metamachina.io'
     </main>
     <Footer />
 
-    <!-- Scroll reveal observer -->
+    <!-- Scroll reveal observer (all variants) -->
     <script>
       const observer = new IntersectionObserver(
         (entries) => {
@@ -99,7 +99,7 @@ const gameUrl = import.meta.env.PUBLIC_GAME_URL || 'https://rift.metamachina.io'
         { threshold: 0.1, rootMargin: '0px 0px -50px 0px' }
       );
 
-      document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+      document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale, .reveal-glitch').forEach((el) => observer.observe(el));
     </script>
   </body>
 </html>
