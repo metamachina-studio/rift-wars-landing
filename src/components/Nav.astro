@@ -2,14 +2,12 @@
 const gameUrl = import.meta.env.PUBLIC_GAME_URL || 'https://rift.metamachina.io';
 
 const navLinks = [
-  { label: 'Features', href: '#features' },
-  { label: 'Cards', href: '#cards' },
-  { label: 'Lore', href: '#lore' },
-  { label: 'News', href: '#news' },
+  { label: 'Features', href: '/#features' },
+  { label: 'Cards', href: '/#cards' },
+  { label: 'News', href: '/#news' },
   { label: 'Rankings', href: '/rankings' },
-  { label: 'Shop', href: '#shop' },
-  { label: 'Battle Pass', href: '#battlepass' },
-  { label: 'Agents', href: '#agents' },
+  { label: 'Shop', href: '/#shop' },
+  { label: 'AI Agents', href: '/#agents' },
 ];
 ---
 
@@ -17,7 +15,7 @@ const navLinks = [
   <div class="max-w-[1400px] mx-auto px-6 h-16 flex items-center justify-between">
     <!-- Logo -->
     <a href="/" class="flex items-center gap-2 z-10">
-      <img src="/RiftWarsLogo.webp" alt="Rift Wars" class="h-8" style="filter: drop-shadow(0 0 8px rgba(242,173,35,0.3));" />
+      <img src="/rift-wars-logo-small.webp" alt="Rift Wars" class="h-8" style="filter: drop-shadow(0 0 8px rgba(242,173,35,0.3));" />
     </a>
 
     <!-- Desktop Nav -->

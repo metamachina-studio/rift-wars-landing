@@ -1,3 +1,6 @@
+// RULE: Every article MUST use a unique image. Never reuse an image that another article already uses.
+// Check all existing `image:` values before assigning one to a new article.
+
 export interface Article {
   slug: string;
   title: string;
@@ -8,6 +11,87 @@ export interface Article {
 }
 
 export const articles: Article[] = [
+  {
+    slug: 'gold-standard-update',
+    title: 'The Gold Standard Update — A New Look for Rift Wars',
+    date: '2026-04-05',
+    summary: 'We\'ve overhauled the visual identity of Rift Wars — the game client and the website have been unified under a bold new gold theme. Here\'s what changed and why.',
+    image: '/art/environments/cyberpunk-poster-02.webp',
+    content: `<h2>A Fresh Coat of Gold</h2>
+<p>If you've visited <a href="https://rift.metamachina.io" target="_blank" rel="noopener noreferrer">Rift Wars</a> or <a href="https://riftwars.metamachina.io" target="_blank" rel="noopener noreferrer">the landing site</a> recently, you'll notice things look different. That's intentional. We've rolled out a major visual update across the board — aligning the game client, the marketing site, and the broader Meta Machina brand under one cohesive identity.</p>
+
+<h3>What Changed</h3>
+<ul>
+<li><strong>Gold Theme</strong> — The entire color palette has shifted from cyan/blue accents to a rich gold identity. Buttons, highlights, stat numbers, section dividers, and glow effects now carry the signature Meta Machina gold (#F2AD23). This isn't just cosmetic — it's brand alignment across every touchpoint.</li>
+<li><strong>Section Backgrounds</strong> — Each section of the landing site now has its own visual texture. Ghosted cyberpunk grid art, subtle drift animations, and alternating charcoal/black tones break up the page and give each section its own atmosphere.</li>
+<li><strong>Gold Divider Lines</strong> — Sections are separated by a thin animated gold gradient line, replacing hard visual breaks with something that feels more integrated.</li>
+<li><strong>Typography Polish</strong> — Key stats and headings across the site now use gold glow effects, making important information pop without overwhelming the dark aesthetic.</li>
+<li><strong>Performance Optimized</strong> — All new background assets are compressed WebP files under 300KB. Animations use CSS-only transforms for smooth 60fps rendering with zero JavaScript overhead.</li>
+</ul>
+
+<h3>Why the Overhaul?</h3>
+<p>As Rift Wars grows from beta into a full ecosystem — with the card game, the upcoming FPS MMO, AI agent integration, and the M-Credz economy — we needed a visual language that works everywhere. Gold represents the Meta Crystal energy that powers Pangaea III, and it ties together every product under the Meta Machina umbrella.</p>
+<p>This is a polish pass, not a pivot. The game mechanics haven't changed. Your cards, your decks, your progress — all exactly where you left them. We're just making the whole experience look and feel more cohesive.</p>
+
+<h3>This is Just the Start</h3>
+<p>We're continuing to refine the look of both the game and the website. More visual polish, new sections, and quality-of-life improvements are in the pipeline. We're treating this like a living product — always iterating, always improving.</p>
+
+<h3>We Want Your Feedback</h3>
+<p>Like the new look? Hate something? Want to suggest improvements? We're listening. Jump into our <a href="https://discord.gg/dNcvNkc33C" target="_blank" rel="noopener noreferrer">Discord</a> and let us know what you think. Your feedback directly shapes what we build next.</p>
+
+<h3>Links</h3>
+<ul>
+<li><a href="https://rift.metamachina.io" target="_blank" rel="noopener noreferrer">Play Rift Wars — Free</a></li>
+<li><a href="https://discord.gg/dNcvNkc33C" target="_blank" rel="noopener noreferrer">Join the Discord</a></li>
+<li><a href="https://x.com/MetaMachina_RW" target="_blank" rel="noopener noreferrer">Follow @MetaMachina_RW</a></li>
+</ul>`,
+  },
+  {
+    slug: 'patch-april-5-2026',
+    title: 'Patch Notes — April 5, 2026',
+    date: '2026-04-05',
+    summary: 'Shinpodo School fixes, combo logic improvements, spectator system groundwork, and a visual polish pass across the board.',
+    image: '/art/environments/weapon-shop-01.webp',
+    content: `<h2>What's New</h2>
+
+<h3>Spectator System (Coming Soon)</h3>
+<p>The foundation for live match spectating has been built. When it goes live, you'll be able to:</p>
+<ul>
+<li><strong>Watch Live Matches</strong> — Browse active games and spectate in real time</li>
+<li><strong>Hype Actions</strong> — Send emojis, shoutouts, and reactions that players and other spectators see live</li>
+<li><strong>Privacy Toggle</strong> — Control whether others can watch your matches</li>
+</ul>
+<p>The spectator system is fully implemented on the backend and will be enabled in a future update once testing is complete.</p>
+
+<h3>Bug Fixes</h3>
+<ul>
+<li><strong>Erosion (Mizu School) Fixed</strong> — The Erosion skill wasn't triggering correctly. It was checking the wrong player context, so the debuff on enemy cards near hidden allies never activated. Fixed — Erosion now properly punishes enemies who place next to your hidden cards on high-crystal tiles.</li>
+<li><strong>Shinpodo Combo Breaking</strong> — Fixed a case where Shinpodo Mode could continue even when your newly placed card was immediately destroyed by an enemy's persistent damage zone. The combo now correctly breaks if your card dies on placement.</li>
+</ul>
+
+<h3>Visual & UI Polish</h3>
+<ul>
+<li><strong>Gold Theme Alignment</strong> — Continued refining the gold visual identity across both the game client and the marketing site. More consistent button styles, glow effects, and color accents.</li>
+<li><strong>Website Section Backgrounds</strong> — Each section of riftwars.metamachina.io now has its own ghosted cyberpunk grid texture with subtle drift animations, plus gold gradient dividers between sections.</li>
+<li><strong>Spectator UI</strong> — Clean new spectator bar showing live watcher count, match info, and hype action panel.</li>
+</ul>
+
+<h3>Under the Hood</h3>
+<ul>
+<li>Audio system improvements for more reliable sound playback across devices.</li>
+<li>Performance optimizations on background assets (compressed WebP, CSS-only animations).</li>
+</ul>
+
+<h3>What's Next</h3>
+<p>We're continuing to polish the game and the website in parallel. More bug fixes, balance tuning, and quality-of-life improvements are in progress. If you run into anything weird, let us know in <a href="https://discord.gg/dNcvNkc33C" target="_blank" rel="noopener noreferrer">Discord</a> — your reports directly shape what we fix next.</p>
+
+<h3>Links</h3>
+<ul>
+<li><a href="https://rift.metamachina.io" target="_blank" rel="noopener noreferrer">Play Rift Wars — Free</a></li>
+<li><a href="https://discord.gg/dNcvNkc33C" target="_blank" rel="noopener noreferrer">Join the Discord</a></li>
+<li><a href="https://x.com/MetaMachina_RW" target="_blank" rel="noopener noreferrer">Follow @MetaMachina_RW</a></li>
+</ul>`,
+  },
   {
     slug: 'ai-agents-live',
     title: 'AI Agents Are Live — Your Bot Can Play Rift Wars',

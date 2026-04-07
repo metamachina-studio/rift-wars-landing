@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { resolvePortraitUrl, type HeroPortrait } from '../lib/portraits';
 
 const API_URL = import.meta.env.PUBLIC_API_URL || 'https://rift.metamachina.io';
 const GAME_URL = import.meta.env.PUBLIC_GAME_URL || 'https://rift.metamachina.io';
@@ -12,6 +13,7 @@ interface LeaderboardEntry {
   losses: number;
   matches_played: number;
   best_combo?: number;
+  hero_portrait?: HeroPortrait | null;
 }
 
 interface ClanRanking {
@@ -103,7 +105,24 @@ export default function Leaderboard() {
                     <td className="py-3 px-2 font-orbitron text-mm-text2">
                       {badge ? <span className={badge.cls}>{badge.emoji}</span> : rank}
                     </td>
-                    <td className="py-3 px-2 font-exo text-mm-text font-semibold">{p.display_name}</td>
+                    <td className="py-3 px-2 font-exo text-mm-text font-semibold">
+                      <div className="flex items-center gap-2">
+                        {p.hero_portrait ? (
+                          <img
+                            src={resolvePortraitUrl(p.hero_portrait)}
+                            alt=""
+                            className="w-7 h-7 rounded-full object-cover border border-mm-gold-primary/20 flex-shrink-0"
+                            loading="lazy"
+                            onError={(e) => { e.currentTarget.style.display = 'none'; }}
+                          />
+                        ) : (
+                          <div className="w-7 h-7 rounded-full bg-mm-elevated/50 border border-mm-gold-primary/10 flex items-center justify-center flex-shrink-0">
+                            <span className="font-orbitron text-[10px] text-mm-gold-primary">{p.display_name.charAt(0).toUpperCase()}</span>
+                          </div>
+                        )}
+                        {p.display_name}
+                      </div>
+                    </td>
                     <td className="py-3 px-2 text-right font-orbitron text-mm-gold-primary">{p.elo}</td>
                     <td className="py-3 px-2 text-right font-rajdhani text-mm-text2 hidden sm:table-cell">{p.level}</td>
                     <td className="py-3 px-2 text-right font-exo text-mm-text2 hidden md:table-cell">

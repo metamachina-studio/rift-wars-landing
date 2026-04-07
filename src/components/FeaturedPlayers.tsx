@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { resolvePortraitUrl, type HeroPortrait } from '../lib/portraits';
 
 const API_URL = import.meta.env.PUBLIC_API_URL || 'https://rift.metamachina.io';
 
@@ -9,14 +10,8 @@ interface Player {
   wins: number;
   losses: number;
   best_combo?: number;
+  hero_portrait?: HeroPortrait | null;
 }
-
-const SCHOOL_COLORS: Record<string, string> = {
-  kazen: '#F2AD23',
-  iwakami: '#a0a0a0',
-  seika: '#ff6b35',
-  mizu: '#4dabf7',
-};
 
 export default function FeaturedPlayers({ limit = 8 }: { limit?: number }) {
   const [players, setPlayers] = useState<Player[]>([]);
@@ -46,7 +41,7 @@ export default function FeaturedPlayers({ limit = 8 }: { limit?: number }) {
   }
 
   return (
-    <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+    <div className={`grid gap-4 ${players.length <= 3 ? 'grid-cols-1 sm:grid-cols-3 max-w-3xl mx-auto' : 'grid-cols-2 sm:grid-cols-4'}`}>
       {players.map((p, i) => (
         <div
           key={i}
@@ -55,12 +50,32 @@ export default function FeaturedPlayers({ limit = 8 }: { limit?: number }) {
           {/* Rank Badge */}
           <div className="font-orbitron text-xs text-mm-gold-primary mb-2">#{i + 1}</div>
 
-          {/* Avatar placeholder */}
-          <div className="w-16 h-16 mx-auto mb-3 rounded-full bg-mm-elevated/50 border border-mm-gold-primary/20 flex items-center justify-center">
-            <span className="font-orbitron text-xl text-mm-gold-primary">
-              {p.display_name.charAt(0).toUpperCase()}
-            </span>
-          </div>
+          {/* Portrait */}
+          {p.hero_portrait ? (
+            <div className="w-16 h-16 mx-auto mb-3 rounded-full overflow-hidden border border-mm-gold-primary/30">
+              <img
+                src={resolvePortraitUrl(p.hero_portrait)}
+                alt={p.display_name}
+                className="w-full h-full object-cover"
+                loading="lazy"
+                onError={(e) => {
+                  const target = e.currentTarget;
+                  target.style.display = 'none';
+                  target.parentElement!.classList.add('flex', 'items-center', 'justify-center', 'bg-mm-elevated/50');
+                  const span = document.createElement('span');
+                  span.className = 'font-orbitron text-xl text-mm-gold-primary';
+                  span.textContent = p.display_name.charAt(0).toUpperCase();
+                  target.parentElement!.appendChild(span);
+                }}
+              />
+            </div>
+          ) : (
+            <div className="w-16 h-16 mx-auto mb-3 rounded-full bg-mm-elevated/50 border border-mm-gold-primary/20 flex items-center justify-center">
+              <span className="font-orbitron text-xl text-mm-gold-primary">
+                {p.display_name.charAt(0).toUpperCase()}
+              </span>
+            </div>
+          )}
 
           {/* Name */}
           <h4 className="font-orbitron text-sm font-bold text-mm-text mb-1 truncate">
