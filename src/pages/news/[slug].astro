@@ -13,14 +13,80 @@ if (!article) {
   return Astro.redirect('/news');
 }
 
-const formattedDate = new Date(article.date).toLocaleDateString('en-US', {
+const formattedDate = new Date(article.date + 'T12:00:00').toLocaleDateString('en-US', {
   month: 'long',
   day: 'numeric',
   year: 'numeric',
 });
+
+// SEO description: prefer seoSummary; otherwise truncate summary to ≤155 chars on a word boundary.
+function truncate(text: string, max = 155): string {
+  if (text.length <= max) return text;
+  const cut = text.slice(0, max);
+  const lastSpace = cut.lastIndexOf(' ');
+  return (lastSpace > 100 ? cut.slice(0, lastSpace) : cut).replace(/[.,;:\-—]+$/, '') + '…';
+}
+const seoDescription = article.seoSummary ?? truncate(article.summary);
+
+const SITE = 'https://riftwars.metamachina.io';
+const ogImageAbs = new URL(article.image, SITE).href;
+const articleUrl = `${SITE}/news/${article.slug}/`;
+const author = article.author ?? '1DigitalC';
+
+// Determine "section" — Rift Wars Papers parts vs. patch notes vs. updates.
+const isPaper = /the rift wars papers/i.test(article.summary) || /Part\s+(I{1,3}|IV|V|VI)/i.test(article.summary);
+const isPatch = /^patch[ -]/i.test(article.title) || /patch notes/i.test(article.title);
+const section = isPaper ? 'The Rift Wars Papers' : isPatch ? 'Patch Notes' : 'Updates';
+
+const articleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: article.title,
+  description: seoDescription,
+  image: [ogImageAbs],
+  datePublished: article.date,
+  dateModified: article.date,
+  mainEntityOfPage: { '@type': 'WebPage', '@id': articleUrl },
+  author: {
+    '@type': 'Person',
+    name: author,
+    url: 'https://x.com/1DigitalC',
+  },
+  publisher: {
+    '@type': 'Organization',
+    name: 'Meta Machina',
+    url: SITE,
+    logo: {
+      '@type': 'ImageObject',
+      url: `${SITE}/rift-wars-logo-large.webp`,
+    },
+  },
+  articleSection: section,
+};
+
+const breadcrumbs = [
+  { name: 'Home', item: `${SITE}/` },
+  { name: 'News', item: `${SITE}/news/` },
+  { name: article.title, item: articleUrl },
+];
 ---
 
-<BaseLayout title={`${article.title} — Rift Wars`} description={article.summary}>
+<BaseLayout
+  title={`${article.title} — Rift Wars`}
+  description={seoDescription}
+  ogImage={article.image}
+  ogImageAlt={article.title}
+  ogType="article"
+  twitterCreator="@1DigitalC"
+  articleMeta={{
+    publishedTime: article.date,
+    author,
+    authorUrl: 'https://x.com/1DigitalC',
+    section,
+  }}
+  breadcrumbs={breadcrumbs}
+  jsonLd={articleSchema}
+>
   <article class="section-padding pt-32 bg-mm-bg">
     <div class="section-container max-w-3xl">
       <!-- Back -->
@@ -29,13 +95,12 @@ const formattedDate = new Date(article.date).toLocaleDateString('en-US', {
       </a>
 
       <!-- Hero Image -->
-      <div class="relative h-64 sm:h-80 mb-8 overflow-hidden border border-mm-elevated/30">
-        <img src={article.image} alt={article.title} class="w-full h-full object-cover" />
-        <div class="absolute inset-0 bg-gradient-to-t from-mm-bg via-transparent to-transparent"></div>
+      <div class="relative mb-8 overflow-hidden border border-mm-elevated/30 bg-mm-bg2">
+        <img src={article.image} alt={article.title} class="w-full h-auto object-contain" />
       </div>
 
       <!-- Header -->
-      <p class="font-rajdhani text-mm-cyan text-sm uppercase tracking-widest mb-3">{formattedDate}</p>
+      <time datetime={article.date} class="block font-rajdhani text-mm-cyan text-sm uppercase tracking-widest mb-3">{formattedDate}</time>
       <h1 class="font-orbitron text-2xl sm:text-3xl font-bold text-mm-text mb-8 neon-text tracking-wide leading-tight">
         {article.title}
       </h1>

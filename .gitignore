@@ -26,3 +26,12 @@ Thumbs.db
 # Dev utilities
 screenshot.png
 take-screenshot.ps1
+
+# Astro build cache (not source)
+.astro/
+
+# Internal infra reports — never publish (public repo)
+AWS-COST-REPORT.md
+
+# Claude Code per-machine permission file
+.claude/settings.local.json

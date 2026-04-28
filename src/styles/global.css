@@ -414,7 +414,8 @@ h1, h2, h3, h4, h5, h6 {
 }
 .mm-grid .grid-cell { width: 12px; height: 12px; }
 
-.grid-cell {
+.mm-grid .grid-cell,
+.mm-hover-grid .grid-cell {
   width: 12px;
   height: 12px;
   border: 1px solid rgba(160, 120, 255, 0.4);

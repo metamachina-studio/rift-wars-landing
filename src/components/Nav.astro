@@ -2,28 +2,32 @@
 const gameUrl = import.meta.env.PUBLIC_GAME_URL || 'https://rift.metamachina.io';
 
 const navLinks = [
-  { label: 'Features', href: '/#features' },
-  { label: 'Cards', href: '/#cards' },
-  { label: 'News', href: '/#news' },
-  { label: 'Rankings', href: '/rankings' },
-  { label: 'Shop', href: '/#shop' },
-  { label: 'AI Agents', href: '/#agents' },
+  { label: 'Features', href: '/#features', section: 'features' },
+  { label: 'Cards', href: '/#cards', section: 'cards' },
+  { label: 'News', href: '/#news', section: 'news' },
+  { label: 'Rankings', href: '/rankings', section: null },
+  { label: 'Shop', href: '/#shop', section: 'shop' },
+  { label: 'AI Agents', href: '/#agents', section: 'agents' },
 ];
 ---
 
-<header id="site-nav" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
-  <div class="max-w-[1400px] mx-auto px-6 h-16 flex items-center justify-between">
+<header id="site-nav" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 overflow-x-clip">
+  <div class="max-w-[1400px] mx-auto px-6 h-16 flex items-center justify-between relative">
     <!-- Logo -->
     <a href="/" class="flex items-center gap-2 z-10">
       <img src="/rift-wars-logo-small.webp" alt="Rift Wars" class="h-8" style="filter: drop-shadow(0 0 8px rgba(242,173,35,0.3));" />
     </a>
 
-    <!-- Desktop Nav -->
-    <nav class="hidden lg:flex items-center gap-6">
+    <!-- Desktop Nav — absolute center so it's page-centered regardless of logo/CTA widths -->
+    <nav class="hidden lg:flex items-center gap-6 absolute left-1/2 -translate-x-1/2">
       {navLinks.map((link) => (
         <a
           href={link.href}
-          class="font-mono font-medium text-xs uppercase tracking-wider text-mm-text2 hover:text-mm-gold-primary transition-colors duration-200"
+          data-section={link.section}
+          class:list={[
+            'font-mono font-medium text-xs uppercase tracking-wider text-mm-text2 hover:text-mm-gold-primary transition-colors duration-200',
+            link.section && 'nav-link',
+          ]}
         >
           {link.label}
         </a>
@@ -46,28 +50,30 @@ const navLinks = [
       </button>
     </div>
   </div>
-
-  <!-- Mobile Menu -->
-  <div id="mobile-menu" class="lg:hidden hidden fixed inset-0 top-16 bg-mm-bg/95 backdrop-blur-lg z-40">
-    <nav class="flex flex-col items-center justify-center gap-6 pt-16">
-      {navLinks.map((link) => (
-        <a
-          href={link.href}
-          class="mobile-link font-mono font-medium text-lg uppercase tracking-wider text-mm-text2 hover:text-mm-gold-primary transition-colors"
-        >
-          {link.label}
-        </a>
-      ))}
-      <a href={gameUrl} target="_blank" rel="noopener" class="btn-filled btn-primary mt-4 text-sm">
-        Play Free Now
-      </a>
-    </nav>
-  </div>
 </header>
+
+<!-- Mobile Menu — OUTSIDE header to avoid iOS backdrop-filter stacking context bug -->
+<div id="mobile-menu" class="lg:hidden hidden fixed inset-0 top-16 z-[60]">
+  <div class="absolute inset-0 bg-black"></div>
+  <nav class="relative z-10 flex flex-col items-center justify-center gap-6 pt-16">
+    {navLinks.map((link) => (
+      <a
+        href={link.href}
+        class="mobile-link font-mono font-medium text-lg uppercase tracking-wider text-mm-text2 hover:text-mm-gold-primary transition-colors"
+      >
+        {link.label}
+      </a>
+    ))}
+    <a href={gameUrl} target="_blank" rel="noopener" class="btn-filled btn-primary mt-4 text-sm">
+      Play Free Now
+    </a>
+  </nav>
+</div>
 
 <style>
   header {
     backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
     background: rgba(0, 0, 0, 0.8);
     border-bottom: 1px solid rgba(242, 173, 35, 0.08);
   }

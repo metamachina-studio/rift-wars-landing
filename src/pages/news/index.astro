@@ -11,16 +11,16 @@ import { articles } from '../../lib/news';
         <div class="section-divider mt-6"></div>
       </div>
 
-      <div class="space-y-8 max-w-3xl mx-auto">
+      <div class="space-y-8 max-w-3xl mx-auto" id="article-list">
         {articles.map(article => (
-          <a href={`/news/${article.slug}`} class="group block bg-mm-card/50 border border-mm-elevated/50 overflow-hidden card-hover">
+          <a href={`/news/${article.slug}`} data-publish={article.date} class="article-card group block bg-mm-card/50 border border-mm-elevated/50 overflow-hidden card-hover">
             <div class="flex flex-col sm:flex-row">
               <div class="sm:w-48 h-32 sm:h-auto flex-shrink-0 overflow-hidden">
                 <img src={article.image} alt={article.title} class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
               </div>
               <div class="p-5 flex-1">
                 <p class="font-rajdhani text-mm-cyan text-xs uppercase tracking-wider mb-1">
-                  {new Date(article.date).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
+                  {new Date(article.date + 'T12:00:00').toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
                 </p>
                 <h2 class="font-orbitron text-sm font-bold text-mm-text mb-2 group-hover:text-mm-cyan transition-colors">{article.title}</h2>
                 <p class="font-exo text-mm-text2 text-sm">{article.summary}</p>
@@ -29,6 +29,14 @@ import { articles } from '../../lib/news';
           </a>
         ))}
       </div>
+
+      <script>
+        // Hide articles with future publish dates
+        const today = new Date().toISOString().split('T')[0];
+        document.querySelectorAll('.article-card').forEach(card => {
+          if (card.dataset.publish > today) card.style.display = 'none';
+        });
+      </script>
     </div>
   </section>
 </BaseLayout>

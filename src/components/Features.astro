@@ -21,9 +21,8 @@ const gameUrl = import.meta.env.PUBLIC_GAME_URL || 'https://rift.metamachina.io'
           Place cards on a 5&times;5 grid to seize territory and control rows. Card abilities can flip, destroy, or shield tiles — and your hero's Shinpodo moves can reshape the entire battlefield. Every turn matters.
         </p>
 
-        <!-- Board with P1 / P2 -->
-        <div class="flex items-center gap-4 md:gap-6">
-          <!-- P1 Label (green) -->
+        <!-- Board: P1 | Grid | P2 -->
+        <div style="display:flex;align-items:center;gap:1rem;">
           <div class="flex flex-col items-center gap-2">
             <div class="w-10 h-10 md:w-12 md:h-12 border-2 border-mm-neon flex items-center justify-center">
               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#39ff14" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
@@ -31,14 +30,12 @@ const gameUrl = import.meta.env.PUBLIC_GAME_URL || 'https://rift.metamachina.io'
             <span class="font-mono text-mm-neon text-xs font-bold tracking-wider">P1</span>
           </div>
 
-          <!-- 5x5 Grid -->
-          <div id="battle-grid" class="grid grid-cols-5 gap-1 w-48 h-48 md:w-60 md:h-60">
+          <div id="battle-grid" class="board-grid">
             {Array.from({ length: 25 }).map((_, i) => (
-              <div class="grid-cell bg-white/5 border border-white/10 transition-all duration-300" data-cell={i}></div>
+              <div class="grid-cell" data-cell={i}></div>
             ))}
           </div>
 
-          <!-- P2 Label (red) -->
           <div class="flex flex-col items-center gap-2">
             <div class="w-10 h-10 md:w-12 md:h-12 border-2 border-mm-red flex items-center justify-center">
               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ff1744" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
@@ -173,8 +170,7 @@ const gameUrl = import.meta.env.PUBLIC_GAME_URL || 'https://rift.metamachina.io'
 
     function resetGrid() {
       cells.forEach((cell) => {
-        cell.className = 'grid-cell bg-white/5 border border-white/10 transition-all duration-300';
-        cell.style.boxShadow = '';
+        cell.className = 'grid-cell';
       });
       moveIndex = 0;
     }
@@ -190,14 +186,7 @@ const gameUrl = import.meta.env.PUBLIC_GAME_URL || 'https://rift.metamachina.io'
 
       const [cellIdx, player] = moves[moveIndex];
       const cell = cells[cellIdx];
-
-      if (player === 1) {
-        cell.className = 'grid-cell border transition-all duration-300 bg-mm-neon/30 border-mm-neon/60';
-        cell.style.boxShadow = '0 0 8px rgba(57,255,20,0.3)';
-      } else {
-        cell.className = 'grid-cell border transition-all duration-300 bg-mm-red/40 border-mm-red/70';
-        cell.style.boxShadow = '0 0 8px rgba(255,23,68,0.4)';
-      }
+      cell.className = player === 1 ? 'grid-cell p1' : 'grid-cell p2';
 
       moveIndex++;
       setTimeout(playMove, 600);
@@ -220,7 +209,34 @@ const gameUrl = import.meta.env.PUBLIC_GAME_URL || 'https://rift.metamachina.io'
   .tier-bar {
     transition: height 0.6s ease;
   }
+
+  .board-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+    width: 14rem;
+    height: 14rem;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+  }
+  @media (min-width: 768px) {
+    .board-grid {
+      width: 18rem;
+      height: 18rem;
+    }
+  }
   .grid-cell {
-    aspect-ratio: 1;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    transition: all 0.3s ease;
+  }
+  .grid-cell.p1 {
+    background: rgba(57, 255, 20, 0.35);
+    border-color: rgba(57, 255, 20, 0.5);
+    box-shadow: inset 0 0 12px rgba(57, 255, 20, 0.3), 0 0 16px rgba(57, 255, 20, 0.4);
+  }
+  .grid-cell.p2 {
+    background: rgba(255, 23, 68, 0.4);
+    border-color: rgba(255, 23, 68, 0.5);
+    box-shadow: inset 0 0 12px rgba(255, 23, 68, 0.3), 0 0 16px rgba(255, 23, 68, 0.4);
   }
 </style>

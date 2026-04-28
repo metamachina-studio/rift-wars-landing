@@ -1,0 +1,187 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const gameUrl = import.meta.env.PUBLIC_GAME_URL || 'https://rift.metamachina.io';
+---
+
+<BaseLayout
+  title="About — Rift Wars by Patrick Breaux"
+  description="Rift Wars is solo developed and self-funded by Patrick Breaux (@1DigitalC) — a 9+ year blockchain veteran, Syscoin Marketing Director, and DavosWeb3 founding member. Built with AI. No VC. No token pre-sale. Just a game worth playing."
+>
+  <section class="section-padding pt-28 pb-0 bg-mm-bg relative overflow-hidden">
+    <!-- Background -->
+    <div class="section-bg-img section-bg-pulse" style="background-image: url('/art/bg/MMGrid4.webp'); opacity: 0.03;"></div>
+
+    <div class="section-container relative z-[2] max-w-4xl">
+
+      <!-- Header -->
+      <div class="text-center mb-12 reveal">
+        <p class="font-mono text-mm-gold-primary uppercase tracking-[0.3em] text-xs mb-3">// THE BUILDER</p>
+        <div class="w-28 h-28 sm:w-32 sm:h-32 mx-auto mb-5 rounded-full overflow-hidden border-2 border-mm-gold-primary/40" style="box-shadow: 0 0 20px rgba(242,173,35,0.2);">
+          <img src="/patrick-breaux.jpg" alt="Patrick Breaux" class="w-full h-full object-cover" />
+        </div>
+        <h1 class="text-3xl sm:text-4xl md:text-5xl font-orbitron font-black tracking-wide mb-4 neon-text">
+          Patrick Breaux
+        </h1>
+        <p class="font-rajdhani text-mm-text2 text-lg uppercase tracking-widest">
+          Solo Developer &amp; Founder — Meta Machina
+        </p>
+        <div class="flex items-center justify-center gap-4 mt-4">
+          <a href="https://x.com/1DigitalC" target="_blank" rel="noopener" class="font-mono text-mm-gold-primary text-sm hover:text-mm-gold transition-colors">@1DigitalC</a>
+          <span class="text-mm-muted">|</span>
+          <span class="font-mono text-mm-muted text-sm">Las Vegas, NV</span>
+        </div>
+        <div class="scan-divider max-w-lg mx-auto mt-6"></div>
+      </div>
+
+      <!-- The Vision -->
+      <div class="reveal mb-14">
+        <div class="bg-mm-card/60 border p-6 sm:p-8 relative overflow-hidden" style="border-color: rgba(242,173,35,0.3); border-left: 3px solid #F2AD23;">
+          <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-mm-gold-primary/5 to-transparent pointer-events-none"></div>
+          <h2 class="font-orbitron text-lg text-mm-gold-primary mb-4">The Vision</h2>
+          <div class="font-exo text-mm-text2 text-sm leading-relaxed space-y-3">
+            <p>
+              I wanted to build a card game where <span class="text-mm-text font-semibold">skill wins</span>. Not wallets. Not grinding. Not whoever spends the most on packs. A game where every card is earnable through play, where strategy matters more than collection size, and where the playing field is genuinely level.
+            </p>
+            <p>
+              Rift Wars is that game. A 5&times;5 tactical card game with 4,276 cards across 16 clans, built from scratch as a love letter to card games that respect the player's time and intelligence. Free-to-play. No pay-to-win. Self-funded. No VC money. No token pre-sale.
+            </p>
+            <p>
+              The Meta Machina universe is bigger than one game — it's a cyberpunk world I've been building since the early 2000's, spanning lore, art, and now live gameplay. Rift Wars is just the beginning.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Who I Am -->
+      <div class="reveal mb-14">
+        <h2 class="font-orbitron text-xl text-mm-gold-primary neon-text text-center mb-8">Who I Am</h2>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
+          <!-- Blockchain -->
+          <div class="bg-mm-card/50 border border-mm-elevated/30 p-5">
+            <div class="flex items-center gap-3 mb-3">
+              <div class="w-10 h-10 border border-mm-gold-primary/40 flex items-center justify-center">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#F2AD23" stroke-width="1.5"><rect x="1" y="1" width="9" height="9" rx="1"/><rect x="14" y="1" width="9" height="9" rx="1"/><rect x="1" y="14" width="9" height="9" rx="1"/><rect x="14" y="14" width="9" height="9" rx="1"/></svg>
+              </div>
+              <h3 class="font-orbitron text-sm text-mm-gold-primary">Blockchain Native</h3>
+            </div>
+            <p class="font-exo text-mm-text2 text-xs leading-relaxed">
+              In blockchain since 2016. Navigated and marketed through every cycle — 2018, 2020, 2022 bears included. Currently Marketing &amp; PR Manager at <a href="https://syscoin.org" target="_blank" rel="noopener" class="text-mm-gold-primary hover:underline">Syscoin</a>, where I've driven 933% community growth and coordinated PR across CoinDesk, CoinTelegraph, Blockworks, Yahoo Finance, and more.
+            </p>
+          </div>
+
+          <!-- DavosWeb3 -->
+          <div class="bg-mm-card/50 border border-mm-elevated/30 p-5">
+            <div class="flex items-center gap-3 mb-3">
+              <div class="w-10 h-10 border border-mm-gold-primary/40 flex items-center justify-center">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#F2AD23" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
+              </div>
+              <h3 class="font-orbitron text-sm text-mm-gold-primary">DavosWeb3 Founder</h3>
+            </div>
+            <p class="font-exo text-mm-text2 text-xs leading-relaxed">
+              Founding member of DavosWeb3 in Davos, Switzerland. Co-authored <em>"Ushering a New Billion into the Global System"</em> whitepaper. Davos Declaration signatory alongside Yat Siu (Animoca Brands), Mo Shaikh (Aptos), and Ajeet Khurana.
+            </p>
+          </div>
+
+          <!-- Real-World Impact -->
+          <div class="bg-mm-card/50 border border-mm-elevated/30 p-5">
+            <div class="flex items-center gap-3 mb-3">
+              <div class="w-10 h-10 border border-mm-gold-primary/40 flex items-center justify-center">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#F2AD23" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              </div>
+              <h3 class="font-orbitron text-sm text-mm-gold-primary">Real-World Impact</h3>
+            </div>
+            <p class="font-exo text-mm-text2 text-xs leading-relaxed">
+              Supported deployment of blockchain infrastructure for a national election in Honduras. Presented to BCP Bank, Peru's largest bank. Delivered developer hackathons in Nigeria with 100+ developers building production dApps.
+            </p>
+          </div>
+
+          <!-- 20+ Years -->
+          <div class="bg-mm-card/50 border border-mm-elevated/30 p-5">
+            <div class="flex items-center gap-3 mb-3">
+              <div class="w-10 h-10 border border-mm-gold-primary/40 flex items-center justify-center">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#F2AD23" stroke-width="1.5"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg>
+              </div>
+              <h3 class="font-orbitron text-sm text-mm-gold-primary">20+ Years Creative</h3>
+            </div>
+            <p class="font-exo text-mm-text2 text-xs leading-relaxed">
+              Two decades of multimedia production — graphic design, videography, 3D animation, web development, and brand strategy. From Sony PlayStation QA to enterprise IT infrastructure managing 600+ endpoints solo.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- How Rift Wars Was Built -->
+      <div class="reveal mb-14">
+        <h2 class="font-orbitron text-xl text-mm-gold-primary neon-text text-center mb-8">How Rift Wars Was Built</h2>
+
+        <div class="bg-mm-card/60 border p-6 sm:p-8" style="border-color: rgba(57,255,20,0.2); border-top: 2px solid #39ff14;">
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-6">
+            <div class="text-center">
+              <p class="font-orbitron text-2xl text-mm-neon" style="text-shadow: 0 0 12px rgba(57,255,20,0.5);">1</p>
+              <p class="font-mono text-mm-muted text-[0.6rem] uppercase tracking-wider">Developer</p>
+            </div>
+            <div class="text-center">
+              <p class="font-orbitron text-2xl text-mm-neon" style="text-shadow: 0 0 12px rgba(57,255,20,0.5);">13</p>
+              <p class="font-mono text-mm-muted text-[0.6rem] uppercase tracking-wider">Days to Ship</p>
+            </div>
+            <div class="text-center">
+              <p class="font-orbitron text-2xl text-mm-neon" style="text-shadow: 0 0 12px rgba(57,255,20,0.5);">200K+</p>
+              <p class="font-mono text-mm-muted text-[0.6rem] uppercase tracking-wider">Lines of Code</p>
+            </div>
+            <div class="text-center">
+              <p class="font-orbitron text-2xl text-mm-neon" style="text-shadow: 0 0 12px rgba(57,255,20,0.5);">$0</p>
+              <p class="font-mono text-mm-muted text-[0.6rem] uppercase tracking-wider">VC Funding</p>
+            </div>
+          </div>
+
+          <div class="font-exo text-mm-text2 text-sm leading-relaxed space-y-3">
+            <p>
+              Rift Wars was built using <span class="text-mm-text font-semibold">AI as a collaborative engineering partner</span>. Not generated — directed. Every architecture decision, every ability system, every balance pass went through a human who cares about the end result. AI handled the velocity. I handled the vision.
+            </p>
+            <p>
+              The result: a fully deployed multiplayer game with server-authoritative matchmaking, 6-tier AI opponents, 4 Shinpodo schools, a full social and economy layer, clan systems, spectator mode with prediction markets, and 4,276 unique cards — all live and serving real players.
+            </p>
+            <p>
+              Self-funded from day one. No investors. No token sale. No pre-mine. Just a game that earns its players through quality, not marketing spend.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Featured In -->
+      <div class="reveal mb-14">
+        <h2 class="font-orbitron text-xl text-mm-gold-primary neon-text text-center mb-8">Featured In</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <a href="https://syscoin.org/news/behind-the-blockchain-patrick-breaux" target="_blank" rel="noopener" class="bg-mm-card/50 border border-mm-elevated/30 p-5 hover:border-mm-gold-primary/40 transition-colors group">
+            <p class="font-orbitron text-sm text-mm-gold-primary group-hover:text-mm-gold transition-colors mb-1">Syscoin Foundation</p>
+            <p class="font-exo text-mm-text2 text-xs">"Behind the Blockchain" developer profile</p>
+          </a>
+          <a href="https://droomdroom.com" target="_blank" rel="noopener" class="bg-mm-card/50 border border-mm-elevated/30 p-5 hover:border-mm-gold-primary/40 transition-colors group">
+            <p class="font-orbitron text-sm text-mm-gold-primary group-hover:text-mm-gold transition-colors mb-1">DroomDroom</p>
+            <p class="font-exo text-mm-text2 text-xs">"Solo Developer Leverages AI to Build AAA Game Universe"</p>
+          </a>
+        </div>
+      </div>
+
+      <!-- Connect -->
+      <div class="reveal text-center mb-16">
+        <div class="scan-divider max-w-lg mx-auto mb-8"></div>
+        <p class="font-exo text-mm-text2 text-sm mb-6">I'm building in public. Follow the journey, give feedback, or just come play.</p>
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+          <a href={gameUrl} target="_blank" rel="noopener" class="btn-primary btn-filled text-sm px-8 py-3">
+            Play Rift Wars
+          </a>
+          <a href="https://x.com/1DigitalC" target="_blank" rel="noopener" class="btn-primary text-sm px-8 py-3">
+            Follow on X
+          </a>
+          <a href="https://discord.gg/metamachina" target="_blank" rel="noopener" class="btn-primary text-sm px-8 py-3">
+            Join Discord
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+</BaseLayout>

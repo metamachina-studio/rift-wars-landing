@@ -4,20 +4,88 @@ import Footer from '../components/Footer.astro';
 import '../styles/global.css';
 import '../styles/animations.css';
 
+interface ArticleMeta {
+  publishedTime: string; // ISO 8601 (YYYY-MM-DD ok)
+  modifiedTime?: string;
+  author?: string;       // display name
+  authorUrl?: string;    // e.g. https://x.com/1DigitalC
+  section?: string;      // e.g. "The Rift Wars Papers"
+  tags?: string[];
+}
+
+interface Breadcrumb {
+  name: string;
+  item: string; // absolute URL
+}
+
 interface Props {
   title?: string;
   description?: string;
   ogImage?: string;
+  ogImageAlt?: string;
+  ogType?: 'website' | 'article';
+  twitterCreator?: string; // e.g. "@1DigitalC"
+  articleMeta?: ArticleMeta;
+  breadcrumbs?: Breadcrumb[];
+  /** Optional override for the page-level JSON-LD schema. If omitted, defaults to VideoGame. */
+  jsonLd?: Record<string, any> | Record<string, any>[];
 }
 
 const {
   title = 'Rift Wars — Free-to-Play Cyberpunk TCG | Meta Machina',
   description = 'A free-to-play, skill-based tactical card game set in the cyberpunk world of Pangaea III. 4,276 cards, 16 clans, ranked multiplayer. No pay-to-win.',
   ogImage = '/og-image.jpg',
+  ogImageAlt = 'Rift Wars — cyberpunk TCG',
+  ogType = 'website',
+  twitterCreator,
+  articleMeta,
+  breadcrumbs,
+  jsonLd,
 } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const ogImageURL = new URL(ogImage, Astro.site).href;
 const gameUrl = import.meta.env.PUBLIC_GAME_URL || 'https://rift.metamachina.io';
+const TWITTER_SITE = '@MetaMachina_RW';
+
+const defaultJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'VideoGame',
+  name: 'Rift Wars',
+  description,
+  genre: ['Card Game', 'Strategy', 'TCG'],
+  gamePlatform: 'Web Browser',
+  applicationCategory: 'Game',
+  operatingSystem: 'Any',
+  offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+  publisher: {
+    '@type': 'Organization',
+    name: 'Meta Machina',
+    url: 'https://riftwars.metamachina.io',
+    sameAs: [
+      'https://x.com/MetaMachina_RW',
+      'https://x.com/1DigitalC',
+      'https://discord.gg/dNcvNkc33C',
+    ],
+  },
+  url: gameUrl,
+};
+
+const pageJsonLd = jsonLd ?? defaultJsonLd;
+const jsonLdArray = Array.isArray(pageJsonLd) ? pageJsonLd : [pageJsonLd];
+
+const breadcrumbJsonLd = breadcrumbs && breadcrumbs.length > 0
+  ? {
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: breadcrumbs.map((b, i) => ({
+        '@type': 'ListItem',
+        position: i + 1,
+        name: b.name,
+        item: b.item,
+      })),
+    }
+  : null;
 ---
 
 <!doctype html>
@@ -33,21 +101,47 @@ const gameUrl = import.meta.env.PUBLIC_GAME_URL || 'https://rift.metamachina.io'
     <link rel="canonical" href={canonicalURL} />
 
     <!-- Open Graph -->
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content={ogType} />
     <meta property="og:url" content={canonicalURL} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:image" content={ogImage} />
+    <meta property="og:image" content={ogImageURL} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={ogImageAlt} />
     <meta property="og:site_name" content="Rift Wars" />
+    <meta property="og:locale" content="en_US" />
+
+    {ogType === 'article' && articleMeta && (
+      <>
+        <meta property="article:published_time" content={articleMeta.publishedTime} />
+        {articleMeta.modifiedTime && <meta property="article:modified_time" content={articleMeta.modifiedTime} />}
+        {articleMeta.author && <meta property="article:author" content={articleMeta.author} />}
+        {articleMeta.section && <meta property="article:section" content={articleMeta.section} />}
+        {articleMeta.tags && articleMeta.tags.map(tag => <meta property="article:tag" content={tag} />)}
+      </>
+    )}
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content={TWITTER_SITE} />
+    {twitterCreator && <meta name="twitter:creator" content={twitterCreator} />}
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content={ogImage} />
+    <meta name="twitter:image" content={ogImageURL} />
+    <meta name="twitter:image:alt" content={ogImageAlt} />
 
-    <!-- Favicon -->
+    <!-- Favicons + Web App Manifest -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
     <link rel="icon" type="image/webp" href="/Meta_Machina_Logo_Tiny.webp" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="theme-color" content="#0a0a0a" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="Rift Wars" />
+    <meta name="application-name" content="Rift Wars" />
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -58,26 +152,12 @@ const gameUrl = import.meta.env.PUBLIC_GAME_URL || 'https://rift.metamachina.io'
     />
 
     <!-- JSON-LD Structured Data -->
-    <script type="application/ld+json" set:html={JSON.stringify({
-      "@context": "https://schema.org",
-      "@type": "VideoGame",
-      "name": "Rift Wars",
-      "description": description,
-      "genre": ["Card Game", "Strategy", "TCG"],
-      "gamePlatform": "Web Browser",
-      "applicationCategory": "Game",
-      "operatingSystem": "Any",
-      "offers": {
-        "@type": "Offer",
-        "price": "0",
-        "priceCurrency": "USD"
-      },
-      "publisher": {
-        "@type": "Organization",
-        "name": "Meta Machina"
-      },
-      "url": gameUrl
-    })} />
+    {jsonLdArray.map(item => (
+      <script type="application/ld+json" set:html={JSON.stringify(item)} />
+    ))}
+    {breadcrumbJsonLd && (
+      <script type="application/ld+json" set:html={JSON.stringify(breadcrumbJsonLd)} />
+    )}
   </head>
   <body class="bg-mm-bg text-mm-text">
     <Nav />
@@ -86,9 +166,14 @@ const gameUrl = import.meta.env.PUBLIC_GAME_URL || 'https://rift.metamachina.io'
     </main>
     <Footer />
 
-    <!-- Scroll reveal observer (all variants) -->
+    <!-- Custom Cursor (reticle) -->
+    <div class="cursor-dot" aria-hidden="true"></div>
+    <div class="cursor-ring" aria-hidden="true"></div>
+
+    <!-- Scroll reveal observer + Tier 1 polish -->
     <script>
-      const observer = new IntersectionObserver(
+      // ----- Scroll reveal observer -----
+      const revealObserver = new IntersectionObserver(
         (entries) => {
           entries.forEach((entry) => {
             if (entry.isIntersecting) {
@@ -98,8 +183,175 @@ const gameUrl = import.meta.env.PUBLIC_GAME_URL || 'https://rift.metamachina.io'
         },
         { threshold: 0.1, rootMargin: '0px 0px -50px 0px' }
       );
+      document
+        .querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale, .reveal-glitch')
+        .forEach((el) => revealObserver.observe(el));
 
-      document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale, .reveal-glitch').forEach((el) => observer.observe(el));
+      // ----- Split Text (char-stagger) -----
+      const splitTargets = document.querySelectorAll<HTMLElement>('.split-text');
+      splitTargets.forEach((el) => {
+        if (el.dataset.split === 'true') return;
+        const text = el.textContent ?? '';
+        el.dataset.split = 'true';
+        el.setAttribute('aria-label', text);
+        el.innerHTML = '';
+        const chars = Array.from(text);
+        chars.forEach((ch, i) => {
+          const span = document.createElement('span');
+          span.className = 'char';
+          span.setAttribute('aria-hidden', 'true');
+          span.textContent = ch === ' ' ? '\u00A0' : ch;
+          span.style.transitionDelay = `${Math.min(i * 0.03, 1.2)}s`;
+          el.appendChild(span);
+        });
+      });
+
+      const splitObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('visible');
+              splitObserver.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.3 }
+      );
+      splitTargets.forEach((el) => splitObserver.observe(el));
+
+      // ----- Count-up (numbers roll from 0 to target on reveal) -----
+      const counters = document.querySelectorAll<HTMLElement>('.count-up');
+      const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      const animateCount = (el: HTMLElement) => {
+        const target = parseFloat(el.dataset.target ?? el.textContent ?? '0');
+        const decimals = parseInt(el.dataset.decimals ?? '0', 10);
+        const duration = parseInt(el.dataset.duration ?? '1400', 10);
+        const suffix = el.dataset.suffix ?? '';
+        const formatter = new Intl.NumberFormat('en-US', {
+          minimumFractionDigits: decimals,
+          maximumFractionDigits: decimals,
+        });
+
+        if (prefersReduced) {
+          el.textContent = formatter.format(target) + suffix;
+          return;
+        }
+
+        const start = performance.now();
+        const tick = (now: number) => {
+          const t = Math.min((now - start) / duration, 1);
+          // easeOutExpo
+          const eased = t === 1 ? 1 : 1 - Math.pow(2, -10 * t);
+          const val = target * eased;
+          el.textContent = formatter.format(val) + suffix;
+          if (t < 1) requestAnimationFrame(tick);
+        };
+        requestAnimationFrame(tick);
+      };
+
+      const countObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              animateCount(entry.target as HTMLElement);
+              countObserver.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.5 }
+      );
+      counters.forEach((el) => {
+        // Cache the original so visible text starts at 0
+        if (!el.dataset.target) el.dataset.target = el.textContent?.replace(/,/g, '') ?? '0';
+        el.textContent = '0';
+        countObserver.observe(el);
+      });
+
+      // ----- Custom Cursor -----
+      const dot = document.querySelector<HTMLElement>('.cursor-dot');
+      const ring = document.querySelector<HTMLElement>('.cursor-ring');
+      const isTouch = window.matchMedia('(hover: none), (pointer: coarse)').matches;
+
+      if (dot && ring && !isTouch && !prefersReduced) {
+        let mx = window.innerWidth / 2;
+        let my = window.innerHeight / 2;
+        let rx = mx;
+        let ry = my;
+
+        window.addEventListener('mousemove', (e) => {
+          mx = e.clientX;
+          my = e.clientY;
+          dot.style.transform = `translate3d(${mx - 3}px, ${my - 3}px, 0)`;
+        });
+
+        // Smooth follow for ring
+        const loop = () => {
+          rx += (mx - rx) * 0.18;
+          ry += (my - ry) * 0.18;
+          ring.style.transform = `translate3d(${rx - 17}px, ${ry - 17}px, 0)`;
+          requestAnimationFrame(loop);
+        };
+        requestAnimationFrame(loop);
+
+        // Hide when leaving window
+        document.addEventListener('mouseleave', () => document.body.classList.add('cursor-hidden'));
+        document.addEventListener('mouseenter', () => document.body.classList.remove('cursor-hidden'));
+
+        // Hover state on interactive elements
+        const hoverSelector = 'a, button, [role="button"], input, textarea, select, .crate-hover, .card-tile';
+        document.addEventListener('mouseover', (e) => {
+          if ((e.target as HTMLElement).closest(hoverSelector)) {
+            ring.classList.add('hover');
+          }
+        });
+        document.addEventListener('mouseout', (e) => {
+          if ((e.target as HTMLElement).closest(hoverSelector)) {
+            ring.classList.remove('hover');
+          }
+        });
+      }
+
+      // ----- Section-aware Nav Indicator -----
+      const navLinks = document.querySelectorAll<HTMLAnchorElement>('.nav-link[data-section]');
+      if (navLinks.length) {
+        const sections: Array<{ id: string; el: HTMLElement; link: HTMLAnchorElement }> = [];
+        navLinks.forEach((link) => {
+          const id = link.dataset.section;
+          if (!id) return;
+          const el = document.getElementById(id);
+          if (el) sections.push({ id, el, link });
+        });
+
+        const OFFSET = 120; // nav height + breathing room
+        let ticking = false;
+
+        const updateActive = () => {
+          ticking = false;
+          let currentId: string | null = null;
+          // Pick the last section whose top has passed the offset line
+          for (const s of sections) {
+            if (s.el.getBoundingClientRect().top - OFFSET <= 0) {
+              currentId = s.id;
+            }
+          }
+          navLinks.forEach((l) => {
+            l.classList.toggle('active', l.dataset.section === currentId);
+          });
+        };
+
+        window.addEventListener(
+          'scroll',
+          () => {
+            if (!ticking) {
+              requestAnimationFrame(updateActive);
+              ticking = true;
+            }
+          },
+          { passive: true }
+        );
+        updateActive();
+      }
     </script>
   </body>
 </html>

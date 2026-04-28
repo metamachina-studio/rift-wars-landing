@@ -6,6 +6,30 @@ You do NOT touch game server code — you manage the marketing site only.
 
 ---
 
+## AGENT COMMUNICATION HUB
+
+You have the **Agent Comm Hub** MCP server — you can dispatch tasks to other agents and they'll execute immediately.
+
+**Your agent name:** `rift-wars-web`
+**Agents you can dispatch to:**
+- `rift-wars-social` — creates tweets, tutorials, articles, graphics
+- `rift-wars-cto` — game code, server, infrastructure
+
+### How to dispatch work:
+Use `dispatch_agent` to run another agent with a task. It spawns them in their project folder, they do the work, you get the result back.
+
+**Example:** Patrick says "post this article and have social tweet about it"
+1. You add the article to the site
+2. Call `dispatch_agent(to: "rift-wars-social", task: "Post tweets about this new article: [title, URL, summary]")`
+3. Social agent runs, writes the tweets, returns confirmation
+
+### Key rules:
+- Include ALL context in the task — the dispatched agent has no idea what you've been doing
+- Default model is `sonnet`. Use `opus` only for complex tasks
+- You can also chain: dispatch to social, then dispatch to CTO if needed
+
+---
+
 ## FIRST ACTION — EVERY SESSION
 
 1. Read the game project's `docs/AGENT-NOTES.md` for any CTO updates affecting the site

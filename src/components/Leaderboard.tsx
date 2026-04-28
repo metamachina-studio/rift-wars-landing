@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { resolvePortraitUrl, type HeroPortrait } from '../lib/portraits';
 
-const API_URL = import.meta.env.PUBLIC_API_URL || 'https://rift.metamachina.io';
+const API_URL = import.meta.env.PUBLIC_API_URL || 'https://api.metamachina.io';
 const GAME_URL = import.meta.env.PUBLIC_GAME_URL || 'https://rift.metamachina.io';
 
 interface LeaderboardEntry {
@@ -9,10 +9,10 @@ interface LeaderboardEntry {
   display_name: string;
   elo: number;
   level: number;
-  wins: number;
-  losses: number;
-  matches_played: number;
-  best_combo?: number;
+  games_won: number;
+  games_lost: number;
+  games_played: number;
+  highest_shinpodo_combo?: number;
   hero_portrait?: HeroPortrait | null;
 }
 
@@ -33,6 +33,13 @@ function getRankBadge(rank: number) {
   if (rank === 2) return { emoji: '\u{1F948}', cls: 'text-gray-300' };
   if (rank === 3) return { emoji: '\u{1F949}', cls: 'text-amber-600' };
   return null;
+}
+
+function getRankAccent(rank: number): string {
+  if (rank === 1) return 'border-l-2 border-l-[#F2AD23]';
+  if (rank === 2) return 'border-l-2 border-l-[#C0C0C0]';
+  if (rank === 3) return 'border-l-2 border-l-[#CD7F32]';
+  return '';
 }
 
 export default function Leaderboard() {
@@ -87,7 +94,7 @@ export default function Leaderboard() {
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
             <thead>
-              <tr className="border-b border-mm-elevated/50">
+              <tr className="border-b border-mm-elevated/50 bg-mm-card/30">
                 <th className="font-rajdhani text-mm-text2 text-left py-3 px-2 uppercase tracking-wider text-xs">#</th>
                 <th className="font-rajdhani text-mm-text2 text-left py-3 px-2 uppercase tracking-wider text-xs">Player</th>
                 <th className="font-rajdhani text-mm-text2 text-right py-3 px-2 uppercase tracking-wider text-xs">ELO</th>
@@ -100,8 +107,10 @@ export default function Leaderboard() {
               {players.map((p, i) => {
                 const rank = p.rank ?? i + 1;
                 const badge = getRankBadge(rank);
+                const rowBg = i % 2 === 0 ? 'bg-mm-bg2/50' : 'bg-transparent';
+                const accent = getRankAccent(rank);
                 return (
-                  <tr key={i} className="border-b border-mm-elevated/20 hover:bg-mm-elevated/20 transition-colors">
+                  <tr key={i} className={`border-b border-mm-elevated/20 hover:bg-mm-elevated/30 transition-colors ${rowBg} ${accent}`}>
                     <td className="py-3 px-2 font-orbitron text-mm-text2">
                       {badge ? <span className={badge.cls}>{badge.emoji}</span> : rank}
                     </td>
@@ -111,13 +120,13 @@ export default function Leaderboard() {
                           <img
                             src={resolvePortraitUrl(p.hero_portrait)}
                             alt=""
-                            className="w-7 h-7 rounded-full object-cover border border-mm-gold-primary/20 flex-shrink-0"
+                            className="w-9 h-9 rounded-full object-cover border border-mm-gold-primary/30 flex-shrink-0"
                             loading="lazy"
                             onError={(e) => { e.currentTarget.style.display = 'none'; }}
                           />
                         ) : (
-                          <div className="w-7 h-7 rounded-full bg-mm-elevated/50 border border-mm-gold-primary/10 flex items-center justify-center flex-shrink-0">
-                            <span className="font-orbitron text-[10px] text-mm-gold-primary">{p.display_name.charAt(0).toUpperCase()}</span>
+                          <div className="w-9 h-9 rounded-full bg-mm-elevated/50 border border-mm-gold-primary/15 flex items-center justify-center flex-shrink-0">
+                            <span className="font-orbitron text-xs text-mm-gold-primary">{p.display_name.charAt(0).toUpperCase()}</span>
                           </div>
                         )}
                         {p.display_name}
@@ -126,11 +135,11 @@ export default function Leaderboard() {
                     <td className="py-3 px-2 text-right font-orbitron text-mm-gold-primary">{p.elo}</td>
                     <td className="py-3 px-2 text-right font-rajdhani text-mm-text2 hidden sm:table-cell">{p.level}</td>
                     <td className="py-3 px-2 text-right font-exo text-mm-text2 hidden md:table-cell">
-                      <span className="text-mm-neon">{p.wins}</span>
+                      <span className="text-mm-neon">{p.games_won}</span>
                       <span className="text-mm-muted">/</span>
-                      <span className="text-mm-red">{p.losses}</span>
+                      <span className="text-mm-red">{p.games_lost}</span>
                     </td>
-                    <td className="py-3 px-2 text-right font-rajdhani text-mm-text2 hidden lg:table-cell">{p.matches_played}</td>
+                    <td className="py-3 px-2 text-right font-rajdhani text-mm-text2 hidden lg:table-cell">{p.games_played}</td>
                   </tr>
                 );
               })}
@@ -144,7 +153,7 @@ export default function Leaderboard() {
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
             <thead>
-              <tr className="border-b border-mm-elevated/50">
+              <tr className="border-b border-mm-elevated/50 bg-mm-card/30">
                 <th className="font-rajdhani text-mm-text2 text-left py-3 px-2 uppercase tracking-wider text-xs">#</th>
                 <th className="font-rajdhani text-mm-text2 text-left py-3 px-2 uppercase tracking-wider text-xs">Clan</th>
                 <th className="font-rajdhani text-mm-text2 text-right py-3 px-2 uppercase tracking-wider text-xs">Level</th>
@@ -156,8 +165,10 @@ export default function Leaderboard() {
               {clans.map((c, i) => {
                 const rank = c.rank ?? i + 1;
                 const badge = getRankBadge(rank);
+                const rowBg = i % 2 === 0 ? 'bg-mm-bg2/50' : 'bg-transparent';
+                const accent = getRankAccent(rank);
                 return (
-                  <tr key={i} className="border-b border-mm-elevated/20 hover:bg-mm-elevated/20 transition-colors">
+                  <tr key={i} className={`border-b border-mm-elevated/20 hover:bg-mm-elevated/30 transition-colors ${rowBg} ${accent}`}>
                     <td className="py-3 px-2 font-orbitron text-mm-text2">
                       {badge ? <span className={badge.cls}>{badge.emoji}</span> : rank}
                     </td>

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-const API_URL = import.meta.env.PUBLIC_API_URL || 'https://rift.metamachina.io';
+const API_URL = import.meta.env.PUBLIC_API_URL || 'https://api.metamachina.io';
 
 export default function PlayerCount() {
   const [count, setCount] = useState<number | null>(null);

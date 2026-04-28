@@ -76,10 +76,12 @@ const quickstartLines = [
         <div class="reveal relative flex items-center justify-center lg:col-span-2 overflow-visible">
           <div class="absolute w-96 h-96 rounded-full agent-glow-orb"></div>
           <div class="relative agent-glitch-container">
-            <video autoplay muted loop playsinline class="agent-replica-img relative z-10">
+            <!-- Video for non-Safari browsers (WebM alpha works) -->
+            <video id="replica-video" autoplay muted loop playsinline class="agent-replica-img relative z-10">
               <source src="/video/replica-attack.webm" type="video/webm" />
-              <img src="/art/Replica.webp" alt="Replica AI Construct" class="agent-replica-img" />
             </video>
+            <!-- Static fallback for Safari/iOS (WebM alpha not supported) -->
+            <img id="replica-fallback" src="/art/Replica.webp" alt="Replica AI Construct" class="agent-replica-img relative z-10 hidden" />
             <div class="absolute bottom-4 left-1/2 -translate-x-1/2 z-20">
               <span class="agent-status-tag font-orbitron uppercase">REPLICA // SENTIENT CONSTRUCT</span>
             </div>
@@ -522,4 +524,15 @@ const quickstartLines = [
       scroll.innerHTML = clone + clone;
     }
   });
+
+  // Safari/iOS: WebM alpha transparency not supported — show static image instead
+  const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent) ||
+    (navigator.userAgent.includes('AppleWebKit') && !navigator.userAgent.includes('Chrome'));
+
+  if (isSafari) {
+    const video = document.getElementById('replica-video');
+    const fallback = document.getElementById('replica-fallback');
+    if (video) video.classList.add('hidden');
+    if (fallback) fallback.classList.remove('hidden');
+  }
 </script>
